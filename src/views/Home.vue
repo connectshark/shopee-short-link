@@ -59,8 +59,7 @@ export default {
       fetch(process.env.VUE_APP_URL, {
         method: "post",
         headers: headers,
-        body: payload,
-        credentials: "include",
+        body: payload
       }).then(function (response) {
         return response.json()
       }).then(function (responseBody) {

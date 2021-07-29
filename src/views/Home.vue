@@ -22,7 +22,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      userInput: 'https://shopee.tw/product/240347883/5124695595',
+      userInput: '',
       resData: '不可修改',
       subId: [],
     }
@@ -47,6 +47,10 @@ export default {
         })
     },
     submit () {
+      if (this.userInput === '') {
+        alert('請填入內容')
+        return
+      }
       let str = ''
       this.subId.forEach((item, index) => {
         str += 'id' + index + '=' + item.subId + '&'

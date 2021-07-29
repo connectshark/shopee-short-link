@@ -22,7 +22,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      userInput: '',
+      userInput: 'https://shopee.tw/product/240347883/5124695595',
       resData: '不可修改',
       subId: [],
     }

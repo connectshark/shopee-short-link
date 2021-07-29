@@ -3,6 +3,10 @@ module.exports = {
     sourceMap: false
   },
 
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/shopee-short-link/'
+    : '/',
+
   devServer: {
     proxy: {
       '/api': {

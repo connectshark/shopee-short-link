@@ -47,45 +47,16 @@ export default {
         })
     },
     submit () {
-      const input = this.userInput
-      const ids = this.subId.map(id => id.subId)
-      while (ids.length < 5) {
-        ids.push('')
-      }
-      let str = `["${ids[0]}","${ids[1]}","${ids[2]}","${ids[3]}","${ids[4]}"]`
-      const graphQLParams = {
-        "query": `mutation {
-          generateShortLink(input:{originUrl: "${input}",subIds:${str}}){
-            shortLink
-          }
-        }`
-      }
-      var appId = process.env.VUE_APP_APPID
-      var secret = process.env.VUE_APP_SECRET
-      var ts = Math.ceil(new Date().getTime()/1000)
-
-      var payload = JSON.stringify(graphQLParams);
-      var factor = appId+ts+payload+secret;
-
-      var sign = CryptoJS.SHA256(factor).toString(CryptoJS.enc.Hex);
-
-      var headers = {
-        "Content-Type": "application/json",
-        "Authorization": "SHA256 Credential="+appId+", Timestamp="+ts+", Signature="+sign
-      }
-      const self = this
-      fetch(process.env.VUE_APP_URL, {
-        method: "post",
-        headers: headers,
-        body: payload,
-        credentials: "include",
-      }).then(function (response) {
-        return response.json()
-      }).then(function (responseBody) {
-        self.resData = responseBody.data.generateShortLink.shortLink
-      }).catch(() => {
-        alert('連結有誤')
+      let str = ''
+      this.subId.forEach((item, index) => {
+        str += 'id' + index + '=' + item.subId + '&'
       })
+      fetch(`${process.env.VUE_APP_URL}?input=${this.userInput}&${str}`)
+        .then(res => res.json())
+        .then(res => {
+          this.resData = res.data.generateShortLink.shortLink
+        })
+        .catch(() => alert('請求錯誤 請通知工程師處理'))
     }
   }
 }

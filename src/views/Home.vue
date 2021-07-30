@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <div class="banner">
-      <div class="banner-content">
-        <h1 class="title">蝦皮短網址服務</h1>
-        <p>簡單 快速 好用</p>
-      </div>
-    </div>
+    <Banner/>
     <section class="main">
       <div class="row">
         <h2 class="row-title">輸入網址</h2>
@@ -26,19 +21,19 @@
       </div>
       <div class="row">
         <h3 class="row-title">填入自訂連結標記</h3>
-        <div class="row-content">
+        <div class="row-content row-sub">
           <input type="text" placeholder="subId1" class="user-input" v-model="subId1">
         </div>
-        <div class="row-content">
+        <div class="row-content row-sub">
           <input type="text" placeholder="subId2" class="user-input" v-model="subId2">
         </div>
-        <div class="row-content">
+        <div class="row-content row-sub">
           <input type="text" placeholder="subId3" class="user-input" v-model="subId3">
         </div>
-        <div class="row-content">
+        <div class="row-content row-sub">
           <input type="text" placeholder="subId4" class="user-input" v-model="subId4">
         </div>
-        <div class="row-content">
+        <div class="row-content row-sub">
           <input type="text" placeholder="subId5" class="user-input" v-model="subId5">
         </div>
       </div>
@@ -48,8 +43,12 @@
 
 <script>
 import { ref } from 'vue'
+import Banner from '../components/banner'
 export default {
   name: 'Home',
+  components: {
+    Banner
+  },
   setup () {
     const input = ref('')
     const subId1 = ref('')
@@ -125,26 +124,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/media.scss';
 .home{
-  .banner{
-    box-sizing: border-box;
-    background-color: #FFC200;
-    padding: 30px 0 60px;
-    .banner-content{
-      width: 90%;
-      margin: auto;
-      color: #fff;
-      text-align: center;
-      .title{
-        font-size: 30px;
-        line-height: 1.9;
-        font-weight: bold;
-      }
-    }
-  }
   .main{
     width: 90%;
     margin: auto;
+    max-width: 1200px;
     position: relative;
     top: -30px;
     .row{
@@ -179,6 +164,15 @@ export default {
           background-color: #198753;
           color: #fff;
           width: 72px;
+        }
+      }
+      .row-sub{
+        width: 40%;
+        margin: 0 5%;
+        display: inline-block;
+        @include desktops {
+          width: 100%;
+          margin: 0;
         }
       }
     }

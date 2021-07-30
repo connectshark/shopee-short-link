@@ -12,6 +12,9 @@
           <Btn :name="'清除'" :callBack="clear" :type="'clear'"/>
         </div>
       </div>
+      <div class="row" v-if="loading">
+        <Loading/>
+      </div>
       <div class="row" v-if="result">
         <h2 class="row-title">已轉換網址</h2>
         <div class="row-content">
@@ -44,14 +47,18 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Banner from '../components/banner'
 import Btn from '../components/btn'
+import Loading from '../components/loading'
+import api from '../hook/api'
+
 export default {
   name: 'Home',
   components: {
     Banner,
-    Btn
+    Btn,
+    Loading
   },
   setup () {
     const input = ref('')
@@ -61,7 +68,7 @@ export default {
     const subId4 = ref('')
     const subId5 = ref('')
     const result = ref('')
-    const show = ref(false)
+    const loading = ref(false)
 
 
 
@@ -75,18 +82,20 @@ export default {
     }
 
     const submitHandler = () => {
+      if (loading.value) return
       result.value = ''
       if (input.value === '') {
         alert('請填入內容')
         return
       }
+      loading.value = true
       let str = `id0=${subId1.value}&id1=${subId2.value}&id2=${subId3.value}&id3=${subId4.value}&id4=${subId5.value}`
-      fetch(`${process.env.VUE_APP_URL}?input=${input.value}&${str}`)
-        .then(res => res.json())
-        .then(res => {
-          result.value = res.data.generateShortLink.shortLink
-        })
-        .catch(() => alert('請求錯誤 請通知工程師處理'))
+
+      const { data, loading: load } = api.shortLink(input.value, str)
+      watch(load, () => loading.value = false)
+      watch(data, value => {
+        result.value = value
+      })
     }
 
 
@@ -117,7 +126,7 @@ export default {
       subId3,
       subId4,
       subId5,
-      show,
+      loading,
       result,
       clear,
       copy,
@@ -173,6 +182,9 @@ export default {
       .btn-group{
         text-align: center;
         padding: 20px 0 0;
+      }
+      .black-mode{
+        background-color: #6e6e6e;
       }
     }
   }

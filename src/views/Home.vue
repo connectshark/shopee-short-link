@@ -7,16 +7,18 @@
         <div class="row-content">
           <input type="url" placeholder="輸入網址" class="user-input" v-model="input">
         </div>
-      </div>
-      <div class="btn-group">
-        <span class="submit btn" @click="submitHandler">送出</span>
-        <span class="clear btn" @click="clear">清除</span>
+        <div class="btn-group">
+          <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'"/>
+          <Btn :name="'清除'" :callBack="clear" :type="'clear'"/>
+        </div>
       </div>
       <div class="row" v-if="result">
         <h2 class="row-title">已轉換網址</h2>
         <div class="row-content">
           <input type="tel" v-model="result" disabled class="user-input">
-          <div class="copy" @click="copy">複製</div>
+        </div>
+        <div class="btn-group">
+          <Btn :name="'複製'" :callBack="copy" :type="'copy'"/>
         </div>
       </div>
       <div class="row">
@@ -44,10 +46,12 @@
 <script>
 import { ref } from 'vue'
 import Banner from '../components/banner'
+import Btn from '../components/btn'
 export default {
   name: 'Home',
   components: {
-    Banner
+    Banner,
+    Btn
   },
   setup () {
     const input = ref('')
@@ -155,47 +159,21 @@ export default {
           padding: 10px;
           box-sizing: border-box;
         }
-        .copy{
-          padding: 10px 20px;
-          box-sizing: border-box;
-          border-radius: 10px;
-          margin: 10px auto;
-          cursor: pointer;
-          background-color: #198753;
-          color: #fff;
-          width: 72px;
-        }
       }
       .row-sub{
         width: 40%;
         margin: 0 5%;
         display: inline-block;
+        transition: width .3s;
         @include desktops {
           width: 100%;
           margin: 0;
         }
       }
-    }
-  }
-  .btn-group{
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    background-color: #fff;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    .btn{
-      padding: 10px 20px;
-      box-sizing: border-box;
-      border-radius: 10px;
-      margin: 0 10px;
-      cursor: pointer;
-    }
-    .submit{
-      background-color: #0FCAF0;
-    }
-    .clear{
-      background-color: #6C757D;
+      .btn-group{
+        text-align: center;
+        padding: 20px 0 0;
+      }
     }
   }
 }

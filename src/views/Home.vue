@@ -1,88 +1,208 @@
 <template>
   <div class="home">
-    <div class="user-input">
-      <input type="text" v-model.trim="userInput" class="input" placeholder="貼上你的連結">
-      <input type="text"
-        v-for="(id, index) in subId" :key="index"
-        v-model.trim="subId[index].subId" class="input" :placeholder="id.placeholder">
+    <div class="banner">
+      <div class="banner-content">
+        <h1 class="title">蝦皮短網址服務</h1>
+        <p>簡單 快速 好用</p>
+      </div>
     </div>
-    <input type="button" value="送出" @click="submit" class="btn">
-    <input type="button" value="清除" @click="userInput = ''" class="btn">
-    <input type="button" value="新增subId" @click="addSubId" class="btn">
-    <div class="res-data">
-      <input type="text" disabled v-model="resData" class="input">
-    </div>
-    <input type="button" value="快速複製" @click="copy" class="btn">
+    <section class="main">
+      <div class="row">
+        <h2 class="row-title">輸入網址</h2>
+        <div class="row-content">
+          <input type="url" placeholder="輸入網址" class="user-input" v-model="input">
+        </div>
+      </div>
+      <div class="btn-group">
+        <span class="submit btn" @click="submitHandler">送出</span>
+        <span class="clear btn" @click="clear">清除</span>
+      </div>
+      <div class="row" v-if="result">
+        <h2 class="row-title">已轉換網址</h2>
+        <div class="row-content">
+          <input type="tel" v-model="result" disabled class="user-input">
+          <div class="copy" @click="copy">複製</div>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="row-title">填入自訂連結標記</h3>
+        <div class="row-content">
+          <input type="text" placeholder="subId1" class="user-input" v-model="subId1">
+        </div>
+        <div class="row-content">
+          <input type="text" placeholder="subId2" class="user-input" v-model="subId2">
+        </div>
+        <div class="row-content">
+          <input type="text" placeholder="subId3" class="user-input" v-model="subId3">
+        </div>
+        <div class="row-content">
+          <input type="text" placeholder="subId4" class="user-input" v-model="subId4">
+        </div>
+        <div class="row-content">
+          <input type="text" placeholder="subId5" class="user-input" v-model="subId5">
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'Home',
-  data () {
-    return {
-      userInput: '',
-      resData: '不可修改',
-      subId: [],
+  setup () {
+    const input = ref('')
+    const subId1 = ref('')
+    const subId2 = ref('')
+    const subId3 = ref('')
+    const subId4 = ref('')
+    const subId5 = ref('')
+    const result = ref('')
+    const show = ref(false)
+
+
+
+    const clear = () => {
+      input.value = ''
+      subId1.value = ''
+      subId2.value = ''
+      subId3.value = ''
+      subId4.value = ''
+      subId5.value = ''
     }
-  },
-  methods: {
-    addSubId () {
-      const length = this.subId.length + 1
-      if (length > 5) return
-      this.subId.push({
-        subId: '',
-        placeholder: 'subId' + length
-      })
-    },
-    copy () {
+
+    const submitHandler = () => {
+      result.value = ''
+      if (input.value === '') {
+        alert('請填入內容')
+        return
+      }
+      let str = `id0=${subId1.value}&id1=${subId2.value}&id2=${subId3.value}&id3=${subId4.value}&id4=${subId5.value}`
+      fetch(`${process.env.VUE_APP_URL}?input=${input.value}&${str}`)
+        .then(res => res.json())
+        .then(res => {
+          result.value = res.data.generateShortLink.shortLink
+        })
+        .catch(() => alert('請求錯誤 請通知工程師處理'))
+    }
+
+
+
+
+    const copy = () => {
       const clipboardy = require('clipboardy')
-      clipboardy.write(this.resData)
+      clipboardy.write(result.value)
         .then(() => {
           alert('複製成功')
         })
         .catch(() => {
           alert('複製失敗 請通報維護工程師')
         })
-    },
-    submit () {
-      if (this.userInput === '') {
-        alert('請填入內容')
-        return
-      }
-      let str = ''
-      this.subId.forEach((item, index) => {
-        str += 'id' + index + '=' + item.subId + '&'
-      })
-      fetch(`${process.env.VUE_APP_URL}?input=${this.userInput}&${str}`)
-        .then(res => res.json())
-        .then(res => {
-          this.resData = res.data.generateShortLink.shortLink
-        })
-        .catch(() => alert('請求錯誤 請通知工程師處理'))
+    }
+
+
+
+
+
+
+
+
+    return {
+      input,
+      subId1,
+      subId2,
+      subId3,
+      subId4,
+      subId5,
+      show,
+      result,
+      clear,
+      copy,
+      submitHandler
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.input{
-  font-size: 24px;
-  width: 80%;
-  max-width: 1200px;
-  line-height: 2;
-  text-align: center;
-}
-.btn{
-  margin: 20px;
-  border: none;
-  font-size: 30px;
-  line-height: 2;
-  border-radius: 10px;
-  background-color: #F1CB4E;
-  &:last-child{
+.home{
+  .banner{
+    box-sizing: border-box;
+    background-color: #FFC200;
+    padding: 30px 0 60px;
+    .banner-content{
+      width: 90%;
+      margin: auto;
+      color: #fff;
+      text-align: center;
+      .title{
+        font-size: 30px;
+        line-height: 1.9;
+        font-weight: bold;
+      }
+    }
+  }
+  .main{
+    width: 90%;
+    margin: auto;
+    position: relative;
+    top: -30px;
+    .row{
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      .row-title{
+        font-size: 24px;
+        line-height: 1.9;
+        color: #333333;
+      }
+      .row-content{
+        padding: 5px 0;
+        .user-input{
+          width: 100%;
+          border: 1px solid #3DBE8A;
+          color: #6e6e6e;
+          font-size: 14px;
+          line-height: 1.1;
+          padding: 10px;
+          box-sizing: border-box;
+        }
+        .copy{
+          padding: 10px 20px;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin: 10px auto;
+          cursor: pointer;
+          background-color: #198753;
+          color: #fff;
+          width: 72px;
+        }
+      }
+    }
+  }
+  .btn-group{
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
     color: #fff;
-    background-color: #645CA0;
+    padding: 20px 0;
+    text-align: center;
+    .btn{
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .submit{
+      background-color: #0FCAF0;
+    }
+    .clear{
+      background-color: #6C757D;
+    }
   }
 }
 </style>

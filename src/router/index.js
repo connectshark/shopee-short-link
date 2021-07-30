@@ -1,20 +1,16 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+const { createRouter, createWebHashHistory } = require('vue-router')
 
-Vue.use(VueRouter)
+const history = createWebHashHistory()
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  }
-]
-
-const router = new VueRouter({
-  mode: 'hash',
-  routes
+const router = createRouter({
+  history,
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: () => import('../views/Home.vue')
+    }
+  ]
 })
 
 export default router

@@ -1,3 +1,3 @@
 # shopee-short-link
 
-vue2 project
+vue3 project

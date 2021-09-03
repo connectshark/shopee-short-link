@@ -4,15 +4,9 @@
 </div>
 </template>
 
-<script>
-export default {
-  setup () {
-    return {
-
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
+.loading{
+  font-size: 20px;
+  text-align: center;
+}
 </style>

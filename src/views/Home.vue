@@ -3,29 +3,31 @@
     <Banner/>
     <section class="main">
       <div class="row">
-        <h2 class="row-title">輸入網址</h2>
+        <h2 class="row-title" title="輸入網址">輸入網址<i class='bx bxs-hand-down'></i></h2>
         <div class="row-content">
-          <input type="url" placeholder="輸入網址" class="user-input" v-model="input">
+          <input type="url" title="蝦皮網址" placeholder="蝦皮網址" class="user-input" v-model="input" autofocus @focus="select($event)">
         </div>
         <div class="btn-group">
           <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'"/>
           <Btn :name="'清除'" :callBack="clear" :type="'clear'"/>
         </div>
       </div>
-      <div class="row" v-if="loading">
-        <Loading/>
-      </div>
-      <div class="row" v-if="result">
-        <h2 class="row-title">已轉換網址</h2>
-        <div class="row-content">
-          <input type="tel" v-model="result" disabled class="user-input">
+      <transition name="slide-fade" mode="out-in">
+        <div class="row" v-if="result">
+          <h2 class="row-title" title="已轉換網址">已轉換網址<i class='bx bx-happy-beaming' ></i></h2>
+          <div class="row-content">
+            <input type="url" v-model="result" disabled class="user-input" :title="result">
+          </div>
+          <div class="btn-group">
+            <Btn :name="'複製'" :callBack="copy" :type="'copy'"/>
+          </div>
         </div>
-        <div class="btn-group">
-          <Btn :name="'複製'" :callBack="copy" :type="'copy'"/>
+      </transition>
+        <div class="row" v-if="loading">
+          <Loading/>
         </div>
-      </div>
       <div class="row">
-        <h3 class="row-title">填入自訂連結標記</h3>
+        <h3 class="row-title" title="填入自訂連結標記">填入自訂連結標記<i class='bx bx-purchase-tag'></i></h3>
         <div class="row-content row-sub">
           <input type="text" placeholder="subId1" class="user-input" v-model="subId1">
         </div>
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import Banner from '../components/banner'
 import Btn from '../components/btn'
 import Loading from '../components/loading'
@@ -91,11 +93,15 @@ export default {
       loading.value = true
       let str = `id0=${subId1.value}&id1=${subId2.value}&id2=${subId3.value}&id3=${subId4.value}&id4=${subId5.value}`
 
-      const { data, loading: load } = api.shortLink(input.value, str)
-      watch(load, () => loading.value = false)
-      watch(data, value => {
-        result.value = value
-      })
+      api.shortLink(input.value, str)
+        .then(res => {
+          result.value = res
+          loading.value = false
+        })
+        .catch(() => {
+          alert('錯誤 請通知工程師')
+          loading.value = false
+        })
     }
 
 
@@ -113,7 +119,9 @@ export default {
     }
 
 
-
+    const select = event => {
+      event.target.select()
+    }
 
 
 
@@ -130,7 +138,8 @@ export default {
       result,
       clear,
       copy,
-      submitHandler
+      submitHandler,
+      select
     }
   }
 }
@@ -138,11 +147,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/media.scss';
+@import '@/assets/scss/transition.scss';
 .home{
   .main{
     width: 90%;
     margin: auto;
-    max-width: 1200px;
+    max-width: 600px;
     position: relative;
     top: -30px;
     .row{
@@ -153,9 +163,10 @@ export default {
       background-color: #fff;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       .row-title{
-        font-size: 24px;
+        font-size: 20px;
         line-height: 1.9;
-        color: #333333;
+        font-weight: bold;
+        color: #6e6e6e;
       }
       .row-content{
         padding: 5px 0;
@@ -163,10 +174,17 @@ export default {
           width: 100%;
           border: 1px solid #3DBE8A;
           color: #6e6e6e;
-          font-size: 14px;
-          line-height: 1.1;
+          font-size: 16px;
+          line-height: 1.5;
           padding: 10px;
           box-sizing: border-box;
+          transition: border .3s;
+          &:focus{
+            border-radius: 5px;
+          }
+          &:invalid{
+            border: 1px solid #f00;
+          }
         }
       }
       .row-sub{

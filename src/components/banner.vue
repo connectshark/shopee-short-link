@@ -7,15 +7,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup () {
-    return {
-
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .banner{
@@ -32,6 +23,11 @@ export default {
       font-size: 30px;
       line-height: 1.9;
       font-weight: bold;
+    }
+    p{
+      font-size: 16px;
+      line-height: 1.1;
+      font-weight: 500;
     }
   }
 }

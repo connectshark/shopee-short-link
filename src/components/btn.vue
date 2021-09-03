@@ -17,11 +17,6 @@ export default {
       type: String,
       required: true
     }
-  },
-  setup () {
-    return {
-
-    }
   }
 }
 </script>
@@ -36,7 +31,13 @@ export default {
   cursor: pointer;
   text-align: center;
   color: #fff;
+  opacity: 1;
+  transition: opacity .3s;
+  font-weight: 500;
   &:hover{
+    opacity: .8;
+  }
+  &:active{
     opacity: .8;
   }
 }

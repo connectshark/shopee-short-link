@@ -4,7 +4,7 @@ const api = {
   shortLink (url, subIds) {
     const loading = ref(true)
     const data = ref(undefined)
-    fetch(`${process.env.VUE_APP_URL}?input=${url}&${subIds}`)
+    fetch(`${process.env.VUE_APP_URL}/shopee?input=${url}&${subIds}`)
       .then(res => res.json())
       .then(res => {
         data.value = res.data.generateShortLink.shortLink

@@ -1,4 +1,4 @@
-const { createRouter, createWebHashHistory } = require('vue-router')
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const history = createWebHashHistory()
 

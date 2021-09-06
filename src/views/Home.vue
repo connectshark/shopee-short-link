@@ -50,10 +50,11 @@
 
 <script>
 import { ref } from 'vue'
-import Banner from '../components/banner'
-import Btn from '../components/btn'
-import Loading from '../components/loading'
+import Banner from '../components/banner.vue'
+import Btn from '../components/btn.vue'
+import Loading from '../components/loading.vue'
 import api from '../hook/api'
+import clipboard from 'copy-text-to-clipboard'
 
 export default {
   name: 'Home',
@@ -108,8 +109,7 @@ export default {
 
 
     const copy = () => {
-      const clipboardy = require('clipboardy')
-      clipboardy.write(result.value)
+      clipboard(result.value)
         .then(() => {
           alert('複製成功')
         })
@@ -146,8 +146,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/media.scss';
-@import '@/assets/scss/transition.scss';
+@import '../assets/scss/media.scss';
+@import '../assets/scss/transition.scss';
 .home{
   .main{
     width: 90%;

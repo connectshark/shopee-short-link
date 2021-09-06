@@ -12,7 +12,7 @@ jobs:
           npm install
           npm run build
         env:
-          VUE_APP_URL: ${{ secrets.APP_URL }}
+          VITE_API_URL: ${{ secrets.APP_URL }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:

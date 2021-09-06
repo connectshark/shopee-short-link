@@ -110,12 +110,7 @@ export default {
 
     const copy = () => {
       clipboard(result.value)
-        .then(() => {
-          alert('複製成功')
-        })
-        .catch(() => {
-          alert('複製失敗 請通報維護工程師')
-        })
+      alert('複製成功')
     }
 
 

@@ -1,8 +1,17 @@
 <template>
   <div class="banner">
     <div class="banner-content">
-      <h1 class="title">蝦皮短網址服務</h1>
-      <p>簡單 快速 好用</p>
+      <h1 class="title">
+        <router-link to="/">蝦皮短網址服務</router-link>
+      </h1>
+      <p class="slogan">簡單 快速 好用</p>
+      <nav class="nav">
+        <ul>
+          <li>
+            <router-link to="/about">作者</router-link>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
@@ -20,11 +29,43 @@
     color: #fff;
     text-align: center;
     .title{
-      font-size: 30px;
-      line-height: 1.9;
-      font-weight: bold;
+      a{
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 30px;
+        line-height: 1.9;
+        font-weight: bold;
+      }
+      &:hover{
+        a{
+          text-decoration: underline;
+        }
+      }
     }
-    p{
+    .nav{
+      padding: 10px 0 0;
+      ul{
+        li{
+          display: inline-block;
+          a{
+            display: block;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 3px;
+            color: #FFC200;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background .3s, color .3s;
+            &:hover{
+              color: #fff;
+              background-color: #FFC200;
+            }
+          }
+        }
+      }
+    }
+    .slogan{
       font-size: 16px;
       line-height: 1.1;
       font-weight: 500;

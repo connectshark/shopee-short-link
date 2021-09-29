@@ -14,7 +14,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+  font-family: 'Roboto Mono', 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -20,7 +20,7 @@
 <style lang="scss" scoped>
 .banner{
   box-sizing: border-box;
-  background-color: #FFC200;
+  background-color: #B45309;
   padding: 30px 0 60px;
   .banner-content{
     width: 90%;
@@ -53,13 +53,13 @@
             background-color: #fff;
             padding: 10px;
             border-radius: 3px;
-            color: #FFC200;
+            color: #B45309;
             text-decoration: none;
             font-weight: bold;
             transition: background .3s, color .3s;
             &:hover{
               color: #fff;
-              background-color: #FFC200;
+              background-color: #B45309;
             }
           }
         }

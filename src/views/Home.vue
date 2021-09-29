@@ -158,20 +158,22 @@ export default {
       color: #6e6e6e;
     }
     .row-content{
-      padding: 5px 0;
       .user-input{
         font-family: 'Roboto Mono', monospace;
         width: 100%;
-        border: 1px solid #3DBE8A;
+        border: none;
+        box-shadow: 0 0 0 1.5px #3DBE8A;
         color: #6e6e6e;
         font-size: 16px;
         line-height: 1.5;
         padding: 10px;
         border-radius: 3px;
         box-sizing: border-box;
-        transition: border .3s;
+        transition: box-shadow .3s;
+        border-radius: 5px;
+        outline: none;
         &:focus{
-          border-radius: 5px;
+          box-shadow: 0 0 0 5px #3DBE8A;
         }
         &:invalid{
           border: 1px solid #f00;
@@ -180,12 +182,12 @@ export default {
     }
     .row-sub{
       width: 40%;
-      margin: 0 5%;
+      margin: 0 5% 20px;
       display: inline-block;
       transition: width .3s;
       @include desktops {
         width: 100%;
-        margin: 0;
+        margin: 0 0 20px;
       }
     }
     .btn-group{

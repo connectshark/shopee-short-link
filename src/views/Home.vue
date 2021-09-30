@@ -26,20 +26,8 @@
       </div>
     <div class="row">
       <h3 class="row-title" title="填入自訂連結標記">填入自訂連結標記<i class='bx bx-purchase-tag'></i></h3>
-      <div class="row-content row-sub">
-        <input type="text" placeholder="subId1" class="user-input" v-model="subId1">
-      </div>
-      <div class="row-content row-sub">
-        <input type="text" placeholder="subId2" class="user-input" v-model="subId2">
-      </div>
-      <div class="row-content row-sub">
-        <input type="text" placeholder="subId3" class="user-input" v-model="subId3">
-      </div>
-      <div class="row-content row-sub">
-        <input type="text" placeholder="subId4" class="user-input" v-model="subId4">
-      </div>
-      <div class="row-content row-sub">
-        <input type="text" placeholder="subId5" class="user-input" v-model="subId5">
+      <div class="row-content row-sub" v-for="(item, index) in subIds" :key="index">
+        <input type="text" :placeholder="'subId' + (index + 1)" class="user-input" v-model="item.value">
       </div>
     </div>
   </section>
@@ -60,11 +48,23 @@ export default {
   },
   setup () {
     const input = ref('')
-    const subId1 = ref('')
-    const subId2 = ref('')
-    const subId3 = ref('')
-    const subId4 = ref('')
-    const subId5 = ref('')
+    const subIds = ref([
+      {
+        value: ''
+      },
+      {
+        value: ''
+      },
+      {
+        value: ''
+      },
+      {
+        value: ''
+      },
+      {
+        value: ''
+      }
+    ])
     const result = ref('')
     const loading = ref(false)
 
@@ -72,11 +72,7 @@ export default {
 
     const clear = () => {
       input.value = ''
-      subId1.value = ''
-      subId2.value = ''
-      subId3.value = ''
-      subId4.value = ''
-      subId5.value = ''
+      subIds.value.forEach(item => item.value === '')
     }
 
     const submitHandler = () => {
@@ -87,17 +83,22 @@ export default {
         return
       }
       loading.value = true
-      let str = `id0=${subId1.value}&id1=${subId2.value}&id2=${subId3.value}&id3=${subId4.value}&id4=${subId5.value}`
 
-      api.shortLink(input.value, str)
-        .then(res => {
-          result.value = res
-          loading.value = false
-        })
-        .catch(() => {
-          alert('錯誤 請通知工程師')
-          loading.value = false
-        })
+      let str = ''
+      subIds.value.forEach((item, index) => {
+        str += `id` + index + '=' + item.value + '&'
+      })
+
+      alert(str)
+      // api.shortLink(input.value, str)
+      //   .then(res => {
+      //     result.value = res
+      //     loading.value = false
+      //   })
+      //   .catch(() => {
+      //     alert('錯誤 請通知工程師')
+      //     loading.value = false
+      //   })
     }
 
 
@@ -119,11 +120,7 @@ export default {
 
     return {
       input,
-      subId1,
-      subId2,
-      subId3,
-      subId4,
-      subId5,
+      subIds,
       loading,
       result,
       clear,

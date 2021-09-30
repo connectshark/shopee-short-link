@@ -89,18 +89,16 @@ export default {
         str += `id` + index + '=' + item.value + '&'
       })
 
-      alert(str)
-      // api.shortLink(input.value, str)
-      //   .then(res => {
-      //     result.value = res
-      //     loading.value = false
-      //   })
-      //   .catch(() => {
-      //     alert('錯誤 請通知工程師')
-      //     loading.value = false
-      //   })
+      api.shortLink(input.value, str)
+        .then(res => {
+          result.value = res
+          loading.value = false
+        })
+        .catch(() => {
+          alert('錯誤 請通知工程師')
+          loading.value = false
+        })
     }
-
 
 
 
@@ -113,10 +111,6 @@ export default {
     const select = event => {
       event.target.select()
     }
-
-
-
-
 
     return {
       input,

@@ -7,8 +7,8 @@
       <p class="slogan">簡單 快速 好用</p>
       <nav class="nav">
         <ul>
-          <li>
-            <router-link to="/about">作者</router-link>
+          <li v-for="item in navs" :key="item.url">
+            <router-link :to="item.url">{{item.name}}</router-link>
           </li>
         </ul>
       </nav>
@@ -16,11 +16,32 @@
   </div>
 </template>
 
+<script>
+export default {
+  setup() {
+    return {
+      navs: [
+        {
+          name: '作者',
+          url: '/about'
+        },
+        // {
+        //   name: '轉換紀錄',
+        //   url: '/record'
+        // }
+      ]
+    }
+  }
+}
+</script>
+
+
 
 <style lang="scss" scoped>
+@import '../assets/scss/color.scss';
 .banner{
   box-sizing: border-box;
-  background-color: #B45309;
+  background-color: $main;
   padding: 30px 0 60px;
   .banner-content{
     width: 90%;
@@ -48,18 +69,19 @@
       ul{
         li{
           display: inline-block;
+          margin: 0 10px;
           a{
             display: block;
             background-color: #fff;
             padding: 10px;
             border-radius: 3px;
-            color: #B45309;
+            color: $main;
             text-decoration: none;
             font-weight: bold;
             transition: background .3s, color .3s;
             &:hover{
               color: #fff;
-              background-color: #B45309;
+              background-color: $main;
             }
           }
         }

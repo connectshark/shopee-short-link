@@ -5,9 +5,14 @@
 
 <script>
 import Banner from './components/banner.vue'
+import { useStore } from 'vuex'
 export default {
   components: {
     Banner
+  },
+  setup () {
+    const store = useStore()
+    store.dispatch('init')
   }
 }
 </script>

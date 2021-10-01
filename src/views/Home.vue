@@ -93,9 +93,10 @@ export default {
       api.shortLink(input.value, str)
         .then(res => {
           result.value = res
+          const arr = subIds.value.map(item => item.value)
           store.commit('addLink', {
             url: res,
-            subids: [...subIds.value]
+            subids: [...arr]
           })
           loading.value = false
         })

@@ -39,6 +39,7 @@ import Btn from '../components/btn.vue'
 import Loading from '../components/loading.vue'
 import api from '../hook/api'
 import clipboard from 'copy-text-to-clipboard'
+import store from '../store'
 
 export default {
   name: 'Home',
@@ -92,6 +93,10 @@ export default {
       api.shortLink(input.value, str)
         .then(res => {
           result.value = res
+          store.commit('addLink', {
+            url: res,
+            subids: [...subIds.value]
+          })
           loading.value = false
         })
         .catch(() => {

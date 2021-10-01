@@ -1,6 +1,6 @@
 <template>
 <li class="link">
-	<p class="url">{{url}}</p>
+	<p class="url">{{url}}  <i class='bx bx-x-circle' @click="del"></i>  <i class='bx bx-copy-alt' title="copy" @click="copy"></i></p>
 	<p class="sub-group">
 		<template v-for="item in subIds" :key="item">
 			<span class="sub-item" v-if="item">{{item}}</span>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import clipboard from 'copy-text-to-clipboard'
+import { useStore } from 'vuex'
 export default {
   props: {
 		url: {
@@ -17,6 +19,24 @@ export default {
 		},
 		subIds: {
 			type: Array
+		},
+		index: {
+			type: Number
+		}
+	},
+	setup (props) {
+		const store = useStore()
+    const copy = () => {
+      clipboard(props.url)
+      alert('複製成功')
+    }
+
+		const del = () => {
+			store.commit('deleteLink', props.index)
+		}
+		return {
+			copy,
+			del
 		}
 	}
 }

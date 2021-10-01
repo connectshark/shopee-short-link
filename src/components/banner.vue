@@ -25,10 +25,10 @@ export default {
           name: '作者',
           url: '/about'
         },
-        // {
-        //   name: '轉換紀錄',
-        //   url: '/record'
-        // }
+        {
+          name: '轉換紀錄',
+          url: '/record'
+        }
       ]
     }
   }

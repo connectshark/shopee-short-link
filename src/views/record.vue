@@ -1,11 +1,15 @@
 <template>
 <div class="record">
-	<ul class="list-group">
+	<ul class="content" v-if="list.length > 0">
 		<Link v-for="(item, index) in list" :key="index"
 			:url="item.url"
 			:subIds="item.subids"
+			:index="index"
 		/>
 	</ul>
+	<div class="content" v-else>
+		<p class="tip"><i class='bx bx-error-alt'></i>尚無轉換連結</p>
+	</div>
 </div>
 </template>
 
@@ -30,7 +34,7 @@ export default {
 <style lang="scss" scoped>
 .record{
 	margin-top: -30px;
-	.list-group{
+	.content{
     width: 90%;
     margin: auto;
     max-width: 600px;
@@ -39,6 +43,11 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		.tip{
+			font-size: 16px;
+			line-height: 1.1;
+			text-align: center;
+		}
 	}
 }
 </style>

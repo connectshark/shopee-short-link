@@ -4,13 +4,11 @@
       <h1 class="title">
         <router-link to="/">蝦皮短網址服務</router-link>
       </h1>
-      <p class="slogan">
-        <transition name="slide-fade" mode="out-in">
-          <span v-if="show === 0">簡單</span>
-          <span v-else-if="show === 1">快速</span>
-          <span v-else>好用</span>
-        </transition>
-      </p>
+      <transition name="slide-fade" mode="out-in">
+      <p class="slogan" v-if="show === 0">簡單</p>
+      <p class="slogan" v-else-if="show === 1">快速</p>
+      <p class="slogan" v-else>好用</p>
+      </transition>
       <nav class="nav">
         <ul>
           <li v-for="item in navs" :key="item.url">
@@ -118,12 +116,8 @@ export default {
     }
     .slogan{
       font-size: 16px;
-      line-height: 1.1;
+      line-height: 20px;
       font-weight: 500;
-      span{
-        transform: translate(0);
-        display: block;
-      }
     }
   }
 }

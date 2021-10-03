@@ -1,15 +1,20 @@
 .slide-fade-enter-active {
-  transition: transform .3s ease-out;
+  transition: all .3s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: transform .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
 .slide-fade-enter-from {
-  transform: translateY(100px);
+  transform: translateY(15px);
+  opacity: 0;
+}
+.slide-fade-enter-to, .slide-fade-leave-from{
+  transform: translateY(0);
 }
 
 .slide-fade-leave-to {
-  transform: translateY(-100px);
+  transform: translateY(-15px);
+  opacity: 0;
 }

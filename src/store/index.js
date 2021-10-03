@@ -30,10 +30,7 @@ const store = createStore({
   },
   actions: {
     init ({ commit }) {
-      commit('addLinks', [{
-        url: 'https://fkdsjlf',
-        subids: ['fjs']
-      }] || ls.load(key))
+      commit('addLinks', ls.load(key))
     }
   }
 })

@@ -4,7 +4,13 @@
       <h1 class="title">
         <router-link to="/">蝦皮短網址服務</router-link>
       </h1>
-      <p class="slogan">簡單 快速 好用</p>
+      <p class="slogan">
+        <transition name="slide-fade" mode="out-in">
+          <span v-if="show === 0">簡單</span>
+          <span v-else-if="show === 1">快速</span>
+          <span v-else>好用</span>
+        </transition>
+      </p>
       <nav class="nav">
         <ul>
           <li v-for="item in navs" :key="item.url">
@@ -17,9 +23,26 @@
 </template>
 
 <script>
+import { onMounted, ref, watch } from 'vue'
 export default {
   setup() {
+    const show = ref(null)
+
+    onMounted(() => {
+      show.value = 0
+    })
+
+    watch( show , value => {
+      setTimeout(() => {
+        if (value > 2) {
+          show.value = 0
+        } else {
+          show.value += value + 1
+        }
+      }, 2000)
+    })
     return {
+      show,
       navs: [
         {
           name: '作者',
@@ -39,6 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/scss/color.scss';
+@import '../assets/scss/transition.scss';
 .banner{
   box-sizing: border-box;
   background-color: $main;
@@ -96,6 +120,10 @@ export default {
       font-size: 16px;
       line-height: 1.1;
       font-weight: 500;
+      span{
+        transform: translate(0);
+        display: block;
+      }
     }
   }
 }

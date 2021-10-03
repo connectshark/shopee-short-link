@@ -42,7 +42,8 @@ export default {
 .banner{
   box-sizing: border-box;
   background-color: $main;
-  padding: 30px 0 60px;
+  padding: 30px 0 0;
+  margin-bottom: 20px;
   .banner-content{
     width: 90%;
     margin: auto;
@@ -72,17 +73,21 @@ export default {
           margin: 0 10px;
           a{
             display: block;
-            background-color: #fff;
+            color: #fff;
+            background-color: $main;
             padding: 10px;
-            border-radius: 3px;
-            color: $main;
+            border-radius: 3px 3px 0 0;
             text-decoration: none;
             font-weight: bold;
             transition: background .3s, color .3s;
             &:hover{
-              color: #fff;
-              background-color: $main;
+              background-color: #fff;
+              color: $main;
             }
+          }
+          .router-link-active{
+            background-color: #fff;
+            color: $main;
           }
         }
       }

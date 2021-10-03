@@ -23,7 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .about{
-  margin-top: -30px;
   .card{
     width: 90%;
     margin: auto;

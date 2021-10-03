@@ -33,7 +33,6 @@ export default {
 
 <style lang="scss" scoped>
 .record{
-	margin-top: -30px;
 	.content{
     width: 90%;
     margin: auto;

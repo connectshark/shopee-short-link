@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Btn from '../components/btn.vue'
 import Loading from '../components/loading.vue'
 import api from '../hook/api'
@@ -139,8 +139,6 @@ export default {
   width: 90%;
   margin: auto;
   max-width: 600px;
-  position: relative;
-  top: -30px;
   .row{
     border-radius: 10px;
     padding: 20px;
@@ -159,6 +157,7 @@ export default {
         font-family: 'Roboto Mono', monospace;
         width: 100%;
         border: none;
+        -webkit-appearance: none;
         box-shadow: 0 0 0 1.5px #3DBE8A;
         color: #6e6e6e;
         font-size: 16px;
@@ -173,7 +172,7 @@ export default {
           box-shadow: 0 0 0 5px #3DBE8A;
         }
         &:invalid{
-          border: 1px solid #f00;
+          box-shadow: 0 0 0 5px #f22;
         }
       }
     }

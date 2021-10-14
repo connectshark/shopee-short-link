@@ -7,6 +7,14 @@
         <a href="https://github.com/connectshark" target="_blank">connectshark</a>
       </figcaption>
     </figure>
+    <p class="icons">
+      <a href="https://github.com/connectshark/shopee-short-link" class="icon" title="此專案" target="_blank">
+        <i class='bx bxl-github'></i>
+      </a>
+      <a href="mailto:bobhus394@gmail.com" class="icon" title="聯繫" target="_blank">
+        <i class='bx bx-mail-send'></i>
+      </a>
+    </p>
   </div>
 </div>
 </template>
@@ -33,6 +41,16 @@ export default {
     box-sizing: border-box;
     background-color: #fff;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    .icons{
+      text-align: center;
+      font-size: 30px;
+      .icon{
+        color: #6e6e6e;
+        &:hover{
+          color: #333;
+        }
+      }
+    }
     figure{
       text-align: center;
       img{

@@ -34,12 +34,13 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import Btn from '../components/btn.vue'
 import Loading from '../components/loading.vue'
 import api from '../hook/api'
 import clipboard from 'copy-text-to-clipboard'
 import store from '../store'
+import { useToast } from 'vue-toastification'
 
 export default {
   name: 'Home',
@@ -48,6 +49,7 @@ export default {
     Loading
   },
   setup () {
+    const toast = useToast()
     const input = ref('')
     const subIds = ref([
       {
@@ -74,13 +76,14 @@ export default {
     const clear = () => {
       input.value = ''
       subIds.value.forEach(item => item.value === '')
+      toast.info('清除')
     }
 
     const submitHandler = () => {
       if (loading.value) return
       result.value = ''
       if (input.value === '') {
-        alert('請填入內容')
+        toast.warning('請填入蝦皮網址')
         return
       }
       loading.value = true
@@ -101,8 +104,8 @@ export default {
           loading.value = false
         })
         .catch(() => {
-          alert('錯誤 請通知工程師')
           loading.value = false
+          toast.error('錯誤請通知工程師')
         })
     }
 
@@ -110,7 +113,7 @@ export default {
 
     const copy = () => {
       clipboard(result.value)
-      alert('複製成功')
+      toast.success('複製成功')
     }
 
 

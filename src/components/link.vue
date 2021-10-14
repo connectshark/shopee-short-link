@@ -12,6 +12,7 @@
 <script>
 import clipboard from 'copy-text-to-clipboard'
 import { useStore } from 'vuex'
+import { useToast } from 'vue-toastification'
 export default {
   props: {
 		url: {
@@ -25,14 +26,16 @@ export default {
 		}
 	},
 	setup (props) {
+    const toast = useToast()
 		const store = useStore()
     const copy = () => {
       clipboard(props.url)
-      alert('複製成功')
+      toast.success('複製成功')
     }
 
 		const del = () => {
 			store.commit('deleteLink', props.index)
+      toast.success('刪除成功')
 		}
 		return {
 			copy,

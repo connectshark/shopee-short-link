@@ -12,6 +12,7 @@ export default defineConfig({
       description: '縮短所有蝦皮購物內的網址，同樣具有預覽連結和網址',
       theme_color: '#bf4800',
       start_url: '/',
+      Scope: '/',
       lang: 'zh-Hant-TW',
       icons: [
         {

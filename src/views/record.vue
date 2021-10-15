@@ -32,16 +32,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/mixin.scss';
 .record{
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
 	.content{
-    width: 90%;
-    margin: auto;
-    max-width: 600px;
-    border-radius: 10px;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #fff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @include box;
 		.tip{
 			font-size: 20px;
 			line-height: 1.1;

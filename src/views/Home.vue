@@ -3,15 +3,15 @@
     <div class="row">
       <h2 class="row-title" title="輸入網址">輸入網址<i class='bx bxs-hand-down'></i></h2>
       <div class="row-content">
-        <input type="url" title="蝦皮網址" placeholder="蝦皮網址" class="user-input" v-model="input" autofocus @focus="select($event)">
+        <input type="url" title="蝦皮網址" placeholder="https://shopee.tw/" class="user-input" v-model="input" autofocus @focus="select($event)">
       </div>
       <div class="btn-group">
         <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'"/>
         <Btn :name="'清除'" :callBack="clear" :type="'clear'"/>
       </div>
     </div>
-    <transition name="slide-fade" mode="out-in">
-      <div class="row" v-if="result">
+    <div class="row" v-if="loading || result">
+      <template v-if="result">
         <h2 class="row-title" title="已轉換網址">已轉換網址<i class='bx bx-happy-beaming' ></i></h2>
         <div class="row-content">
           <input type="url" v-model="result" disabled class="user-input" :title="result">
@@ -19,11 +19,9 @@
         <div class="btn-group">
           <Btn :name="'複製'" :callBack="copy" :type="'copy'"/>
         </div>
-      </div>
-    </transition>
-      <div class="row" v-if="loading">
-        <Loading/>
-      </div>
+      </template>
+      <Loading v-else/>
+    </div>
     <div class="row">
       <h3 class="row-title" title="填入自訂連結標記">填入自訂連結標記<i class='bx bx-purchase-tag'></i></h3>
       <div class="row-content row-sub" v-for="(item, index) in subIds" :key="index">
@@ -136,24 +134,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/mixin.scss';
 @import '../assets/scss/media.scss';
+@import '../assets/scss/color.scss';
 @import '../assets/scss/transition.scss';
 .main{
   width: 90%;
   margin: auto;
   max-width: 600px;
   .row{
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    background-color: #fff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @include box;
     .row-title{
       font-size: 20px;
-      line-height: 1.9;
+      line-height: 2;
       font-weight: bold;
-      color: #6e6e6e;
+      color: $font;
     }
     .row-content{
       .user-input{
@@ -162,7 +157,7 @@ export default {
         border: none;
         -webkit-appearance: none;
         box-shadow: 0 0 0 1.5px #3DBE8A;
-        color: #6e6e6e;
+        color: $font;
         font-size: 16px;
         line-height: 1.5;
         padding: 10px;
@@ -194,7 +189,7 @@ export default {
       padding: 20px 0 0;
     }
     .black-mode{
-      background-color: #6e6e6e;
+      background-color: $font;
     }
   }
 }

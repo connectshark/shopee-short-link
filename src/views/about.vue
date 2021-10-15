@@ -30,22 +30,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/mixin.scss';
+@import '../assets/scss/color.scss';
 .about{
+  width: 90%;
+  margin: auto;
+  max-width: 600px;
   .card{
-    width: 90%;
-    margin: auto;
-    max-width: 600px;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    background-color: #fff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @include box;
     .icons{
       text-align: center;
       font-size: 30px;
       .icon{
-        color: #6e6e6e;
+        color: $font;
         &:hover{
           color: #333;
         }
@@ -65,7 +62,7 @@ export default {
           font-size: 20px;
           line-height: 2;
           text-decoration: none;
-          color: #6e6e6e;
+          color: $font;
         }
       }
     }

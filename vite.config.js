@@ -10,8 +10,6 @@ export default defineConfig({
       short_name: '縮蝦',
       description: '縮短所有蝦皮的連結',
       theme_color: '#bf4800',
-      start_url: '/',
-      scope: '/',
       lang: 'zh-Hant-TW',
       "prefer_related_applications": true,
       "related_applications": [{

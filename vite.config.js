@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [vue(), VitePWA({
     includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
     manifest: {
-      name: '蝦皮短網址服務',
-      short_name: '縮蝦',
-      description: '縮短所有蝦皮購物內的網址，同樣具有預覽連結和網址',
+      name: 'short shopee link',
+      short_name: 'SL',
+      description: 'you can short all shopee link in here',
       theme_color: '#bf4800',
       start_url: '/',
       Scope: '/',

@@ -7,31 +7,31 @@ export default defineConfig({
     vue(),
     VitePWA({
       base: '/',
-      includeAssets: ['favicon.png'],
-      workbox: {
-        cleanupOutdatedCaches: true,
-        skipWaiting: true,
-        clientsClaim: true
-      },
+      includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'V2P2 Starter',
-        short_name: 'V2P2',
-        background_color: '#acafb6',
-        theme_color: '#acafb6',
+        name: 'PWA Basic',
+        short_name: 'PWA Basic',
+        theme_color: '#ffffff',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'pwa-192x192.png', // <== don't add slash, for testing
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'pwa-512x512.png', // <== don't remove slash, for testing
             sizes: '512x512',
             type: 'image/png',
-          }
-        ]
-      }
-    })
+          },
+          {
+            src: 'pwa-512x512.png', // <== don't add slash, for testing
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
+    }),
   ],
   server: {
     port: 8080

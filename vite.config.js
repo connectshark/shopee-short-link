@@ -3,15 +3,21 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  plugins: [vue(),
+  plugins: [
+    vue(),
     VitePWA({
-      mode: 'development',
       base: '/',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.png'],
+      workbox: {
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true
+      },
       manifest: {
-        name: 'PWA Basic',
-        short_name: 'PWA Basic',
-        theme_color: '#ffffff',
+        name: 'V2P2 Starter',
+        short_name: 'V2P2',
+        background_color: '#acafb6',
+        theme_color: '#acafb6',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -19,18 +25,12 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-      },
+          }
+        ]
+      }
     })
   ],
   server: {

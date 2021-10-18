@@ -14,6 +14,11 @@ export default defineConfig({
       start_url: '/',
       Scope: '/',
       lang: 'zh-Hant-TW',
+      "prefer_related_applications": true,
+      "related_applications": [{
+        "platform": "web",
+        "url":"https://connectshark.github.io/"
+      }],
       icons: [
         {
           src: 'pwa-192x192.png',

@@ -56,9 +56,11 @@ export default {
     @include box;
     .icons{
       text-align: center;
-      font-size: 30px;
       .icon{
+        font-size: 30px;
         color: $font;
+        margin: 0 5px;
+        transition: color .3s;
         &:hover{
           color: #333;
         }

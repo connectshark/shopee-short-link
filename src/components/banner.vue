@@ -12,7 +12,9 @@
       <nav class="nav">
         <ul>
           <li v-for="item in navs" :key="item.url">
-            <router-link :to="item.url">{{item.name}}</router-link>
+            <router-link :to="item.url">
+              <i class='bx' :class="item.name"></i>
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -43,11 +45,11 @@ export default {
       show,
       navs: [
         {
-          name: '作者',
+          name: 'bxs-pen',
           url: '/about'
         },
         {
-          name: '轉換紀錄',
+          name: 'bx-clipboard',
           url: '/record'
         }
       ]

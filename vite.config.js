@@ -3,33 +3,36 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  plugins: [vue(), VitePWA({
-    includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
-    manifest: {
-      name: '蝦皮短網址',
-      short_name: '縮蝦',
-      description: '縮短所有蝦皮的連結',
-      theme_color: '#bf4800',
-      lang: 'zh-Hant-TW',
-      "prefer_related_applications": true,
-      "related_applications": [{
-        "platform": "web",
-        "url":"https://connectshark.github.io/"
-      }],
-      icons: [
-        {
-          src: 'pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }
-      ]
-    }
-  })],
+  plugins: [vue(),
+    VitePWA({
+      mode: 'development',
+      base: '/',
+      includeAssets: ['favicon.svg'],
+      manifest: {
+        name: 'PWA Basic',
+        short_name: 'PWA Basic',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
+    })
+  ],
   server: {
     port: 8080
   }

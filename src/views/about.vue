@@ -14,16 +14,32 @@
       <a href="mailto:bobhus394@gmail.com" class="icon" title="聯繫" target="_blank">
         <i class='bx bx-mail-send'></i>
       </a>
+      <a href="javascript:;" class="icon" title="分享" @click.prevent="share">
+        <i class='bx bx-share-alt'></i>
+      </a>
     </p>
   </div>
 </div>
 </template>
 
 <script>
+import { useToast } from 'vue-toastification'
 export default {
   setup () {
+    const toast = useToast()
+    const share = () => {
+      if (navigator.share) {
+        navigator.share({
+          title: '蝦皮短網址服務',
+          text: '縮短蝦皮網站上的連結',
+          url: 'https://shopee.nosegates.com/',
+        }).then(() => {
+          toast.success('感謝分享!!')
+        })
+      }
+    }
     return {
-
+      share
     }
   }
 }

@@ -73,7 +73,7 @@ export default {
 
     const clear = () => {
       input.value = ''
-      subIds.value.forEach(item => item.value === '')
+      subIds.value.forEach(item => item.value = '')
       toast.info('清除')
     }
 

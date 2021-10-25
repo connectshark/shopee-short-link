@@ -3,7 +3,7 @@
     <div class="row">
       <h2 class="row-title" title="輸入網址">輸入網址<i class='bx bxs-hand-down'></i></h2>
       <div class="row-content">
-        <input type="url" title="蝦皮網址" placeholder="https://shopee.tw/" class="user-input" v-model="input" autofocus @focus="select($event)">
+        <input type="url" title="蝦皮網址" placeholder="https://shopee.tw/" pattern="https://shopee.tw/.*" class="user-input" v-model="input" autofocus @focus="select($event)">
       </div>
       <div class="btn-group">
         <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'"/>
@@ -83,6 +83,9 @@ export default {
       if (input.value === '') {
         toast.warning('請填入蝦皮網址')
         return
+      } else if (!input.value.match(/https\:\/\/shopee\.tw/)) {
+        toast.warning('非蝦皮網址')
+        return
       }
       loading.value = true
 
@@ -158,6 +161,9 @@ export default {
         -webkit-appearance: none;
         box-shadow: 0 0 0 1.5px #3DBE8A;
         color: $font;
+        &::placeholder{
+          color: $holder;
+        }
         font-size: 16px;
         line-height: 1.5;
         padding: 10px;

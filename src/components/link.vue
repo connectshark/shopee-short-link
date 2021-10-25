@@ -72,6 +72,11 @@ export default {
 			padding: 5px;
 			border-radius: 30px;
 			margin: 0 5px;
+      transform: scale(1);
+      transition: transform .3s;
+      &:hover{
+        transform: scale(1.1);
+      }
 		}
 	}
 }

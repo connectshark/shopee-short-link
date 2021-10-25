@@ -4,13 +4,10 @@
     <figure>
       <img src="../assets/author.jpg" alt="author">
       <figcaption>
-        <a href="https://github.com/connectshark" target="_blank">connectshark</a>
+        <a href="mailto:bobhus394@gmail.com">connectshark</a>
       </figcaption>
     </figure>
     <p class="icons">
-      <a href="https://github.com/connectshark/shopee-short-link" class="icon" title="此專案" target="_blank">
-        <i class='bx bxl-github'></i>
-      </a>
       <a href="mailto:bobhus394@gmail.com" class="icon" title="聯繫" target="_blank">
         <i class='bx bx-mail-send'></i>
       </a>
@@ -57,12 +54,14 @@ export default {
     .icons{
       text-align: center;
       .icon{
+        display: inline-block;
         font-size: 30px;
         color: $font;
         margin: 0 5px;
-        transition: color .3s;
-        &:hover{
-          color: #333;
+        transform: scale(1);
+        transition: transform .3s;
+        &:hover, &:active{
+          transform: scale(1.2);
         }
       }
     }

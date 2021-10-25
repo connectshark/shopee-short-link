@@ -33,6 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/scss/mixin.scss';
+@import '../assets/scss/color.scss';
 .record{
   width: 90%;
   max-width: 600px;
@@ -40,9 +41,11 @@ export default {
 	.content{
     @include box;
 		.tip{
+      color: $holder;
 			font-size: 20px;
 			line-height: 1.1;
 			text-align: center;
+      font-style: italic;
 		}
 	}
 }

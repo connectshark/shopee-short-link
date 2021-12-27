@@ -1,31 +1,62 @@
 <template>
   <section class="main">
     <div class="row">
-      <h2 class="row-title" title="輸入網址">輸入網址<i class='bx bxs-hand-down'></i></h2>
+      <h2 class="row-title" title="輸入網址">
+        輸入網址
+        <i class="bx bxs-hand-down"></i>
+      </h2>
       <div class="row-content">
-        <input type="url" title="蝦皮網址" placeholder="https://shopee.tw/" pattern="https://shopee.tw/.*" class="user-input" v-model="input" autofocus @focus="select($event)">
+        <input
+          type="url"
+          title="蝦皮網址"
+          placeholder="https://shopee.tw/"
+          pattern="https://shopee.tw/.*"
+          class="user-input"
+          v-model="input"
+          autofocus
+          @focus="select($event)"
+        />
       </div>
       <div class="btn-group">
-        <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'"/>
-        <Btn :name="'清除'" :callBack="clear" :type="'clear'"/>
+        <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'" />
+        <Btn :name="'清除'" :callBack="clear" :type="'clear'" />
       </div>
     </div>
     <div class="row" v-if="loading || result">
       <template v-if="result">
-        <h2 class="row-title" title="已轉換網址">已轉換網址<i class='bx bx-happy-beaming' ></i></h2>
+        <h2 class="row-title" title="已轉換網址">
+          已轉換網址
+          <i class="bx bx-happy-beaming"></i>
+        </h2>
         <div class="row-content">
-          <input type="url" v-model="result" disabled class="user-input" :title="result">
+          <input type="url" v-model="result" disabled class="user-input" :title="result" />
         </div>
         <div class="btn-group">
-          <Btn :name="'複製'" :callBack="copy" :type="'copy'"/>
+          <Btn :name="'複製'" :callBack="copy" :type="'copy'" />
         </div>
       </template>
-      <Loading v-else/>
+      <Loading v-else />
     </div>
     <div class="row">
-      <h3 class="row-title" title="填入自訂連結標記">填入自訂連結標記<i class='bx bx-purchase-tag'></i></h3>
+      <h3 class="row-title" title="填入自訂連結標記">
+        填入記憶文字
+        <i class="bx bx-purchase-tag"></i>
+      </h3>
+      <p class="detail">使用於標記或區分短連結</p>
+      <p class="detail">
+        可以於
+        <router-link to="/record" class="link">
+          <i class="bx bx-clipboard"></i>轉換紀錄
+        </router-link>查看
+      </p>
+      <p class="detail">僅限英文+數字</p>
       <div class="row-content row-sub" v-for="(item, index) in subIds" :key="index">
-        <input type="text" :placeholder="'subId' + (index + 1)" class="user-input" v-model="item.value">
+        <input
+          type="text"
+          :placeholder="'subId' + (index + 1)"
+          class="user-input"
+          v-model="item.value"
+        />
       </div>
     </div>
   </section>
@@ -46,7 +77,7 @@ export default {
     Btn,
     Loading
   },
-  setup () {
+  setup() {
     const toast = useToast()
     const input = ref('')
     const subIds = ref([
@@ -137,65 +168,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/mixin.scss';
-@import '../assets/scss/media.scss';
-@import '../assets/scss/color.scss';
-@import '../assets/scss/transition.scss';
-.main{
+@import "../assets/scss/mixin.scss";
+@import "../assets/scss/media.scss";
+@import "../assets/scss/color.scss";
+@import "../assets/scss/transition.scss";
+.main {
   width: 90%;
   margin: auto;
   max-width: 600px;
-  .row{
+  .row {
     @include box;
-    .row-title{
-      font-size: 20px;
+    .row-title {
+      font-size: 1.5rem;
       line-height: 2;
       font-weight: bold;
       color: $font;
     }
-    .row-content{
-      .user-input{
-        font-family: 'Roboto Mono', monospace;
+    .detail {
+      line-height: 1;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      .link {
+        color: $font;
+        &:hover {
+          color: $sub;
+        }
+      }
+    }
+    .row-content {
+      .user-input {
+        font-family: "Roboto Mono", monospace;
         width: 100%;
         border: none;
         -webkit-appearance: none;
-        box-shadow: 0 0 0 1.5px #3DBE8A;
+        box-shadow: 0 0 0 1.5px #3dbe8a;
         color: $font;
-        &::placeholder{
+        &::placeholder {
           color: $holder;
         }
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 1.5;
-        padding: 10px;
-        border-radius: 3px;
+        padding: 0.7rem;
+        border-radius: 0.5rem;
         box-sizing: border-box;
-        transition: box-shadow .3s;
-        border-radius: 5px;
+        transition: box-shadow 0.3s ease;
         outline: none;
-        &:focus{
-          box-shadow: 0 0 0 5px #3DBE8A;
+        &:focus {
+          box-shadow: 0 0 0 5px #3dbe8a;
         }
-        &:invalid{
+        &:invalid {
           box-shadow: 0 0 0 5px #f22;
         }
       }
     }
-    .row-sub{
-      width: 40%;
-      margin: 0 5% 20px;
+    .row-sub {
+      width: 100%;
+      margin: 0 0 20px;
       display: inline-block;
-      transition: width .3s;
-      @include desktops {
-        width: 100%;
-        margin: 0 0 20px;
-      }
     }
-    .btn-group{
+    .btn-group {
       text-align: center;
-      padding: 20px 0 0;
-    }
-    .black-mode{
-      background-color: $font;
+      padding: 1.5rem 0 0;
     }
   }
 }

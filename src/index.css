@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn{
+  @apply active:opacity-80 inline-block text-base mx-2 rounded-lg text-white py-2 px-7 cursor-pointer hover:opacity-80 transition-opacity;
+}
+
+.path{
+  @apply hover:text-yellow-400 hover:underline;
+}
+
+.bar{
+  @apply rounded-lg p-3 w-full placeholder:text-gray-400 outline-none ring-2 ring-green-500 focus:ring-4 transition;
+}
+
+.row{
+  @apply p-4 rounded-2xl shadow bg-white;
+}

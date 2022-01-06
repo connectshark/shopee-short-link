@@ -1,20 +1,15 @@
 <template>
-  <Banner/>
-  <router-view></router-view>
+  <Banner />
+  <main class="w-5/6 max-w-3xl mx-auto py-6">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </main>
 </template>
 
 <script setup>
 import Banner from './components/banner.vue'
-import { useStore } from 'vuex'
-const store = useStore()
-store.dispatch('init')
+import { useLinkStore } from './stores/link'
+const store = useLinkStore()
+store.initState()
 </script>
-
-<style>
-#app {
-  font-family: 'Roboto Mono', 'Noto Sans TC', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 1rem;
-}
-</style>

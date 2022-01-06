@@ -1,235 +1,157 @@
-<template>
-  <section class="main">
-    <div class="row">
-      <h2 class="row-title" title="輸入網址">
-        輸入網址
-        <i class="bx bxs-hand-down"></i>
-      </h2>
-      <div class="row-content">
-        <input
-          type="url"
-          title="蝦皮網址"
-          placeholder="https://shopee.tw/"
-          pattern="https://shopee.tw/.*"
-          class="user-input"
-          v-model="input"
-          autofocus
-          @focus="select($event)"
-        />
-      </div>
-      <div class="btn-group">
-        <Btn :name="'送出'" :callBack="submitHandler" :type="'submit'" />
-        <Btn :name="'清除'" :callBack="clear" :type="'clear'" />
-      </div>
-    </div>
-    <div class="row" v-if="loading || result">
-      <template v-if="result">
-        <h2 class="row-title" title="已轉換網址">
-          已轉換網址
-          <i class="bx bx-happy-beaming"></i>
-        </h2>
-        <div class="row-content">
-          <input type="url" v-model="result" disabled class="user-input" :title="result" />
-        </div>
-        <div class="btn-group">
-          <Btn :name="'複製'" :callBack="copy" :type="'copy'" />
-        </div>
-      </template>
-      <Loading v-else />
-    </div>
-    <div class="row">
-      <h3 class="row-title" title="填入自訂連結標記">
-        填入記憶文字
-        <i class="bx bx-purchase-tag"></i>
-      </h3>
-      <p class="detail">使用於標記或區分短連結</p>
-      <p class="detail">
-        可以於
-        <router-link to="/record" class="link">
-          <i class="bx bx-clipboard"></i>轉換紀錄
-        </router-link>查看
-      </p>
-      <p class="detail">僅限英文+數字</p>
-      <div class="row-content row-sub" v-for="(item, index) in subIds" :key="index">
-        <input
-          type="text"
-          :placeholder="'subId' + (index + 1)"
-          class="user-input"
-          v-model="item.value"
-        />
-      </div>
-    </div>
-  </section>
-</template>
-
-<script>
+<script setup>
 import { ref } from 'vue'
-import Btn from '../components/btn.vue'
-import Loading from '../components/loading.vue'
-import api from '../hook/api'
-import clipboard from 'copy-text-to-clipboard'
-import store from '../store'
 import { useToast } from 'vue-toastification'
+import api from '../hook/api'
+import { useLinkStore } from '../stores/link'
+import clipboard from 'copy-text-to-clipboard'
+const toast = useToast()
+const store = useLinkStore()
 
-export default {
-  name: 'Home',
-  components: {
-    Btn,
-    Loading
+const input = ref('')
+const result = ref('')
+const subIds = ref([
+  {
+    value: ''
   },
-  setup() {
-    const toast = useToast()
-    const input = ref('')
-    const subIds = ref([
-      {
-        value: ''
-      },
-      {
-        value: ''
-      },
-      {
-        value: ''
-      },
-      {
-        value: ''
-      },
-      {
-        value: ''
-      }
-    ])
-    const result = ref('')
-    const loading = ref(false)
-
-
-
-    const clear = () => {
-      input.value = ''
-      subIds.value.forEach(item => item.value = '')
-      toast.info('清除')
-    }
-
-    const submitHandler = () => {
-      if (loading.value) return
-      result.value = ''
-      if (input.value === '') {
-        toast.warning('請填入蝦皮網址')
-        return
-      } else if (!input.value.match(/https\:\/\/shopee\.tw/)) {
-        toast.warning('非蝦皮網址')
-        return
-      }
-      loading.value = true
-
-      let str = ''
-      subIds.value.forEach((item, index) => {
-        str += `id` + index + '=' + item.value + '&'
-      })
-
-      api.shortLink(input.value, str)
-        .then(res => {
-          result.value = res
-          const arr = subIds.value.map(item => item.value)
-          store.commit('addLink', {
-            url: res,
-            subids: [...arr]
-          })
-          loading.value = false
-        })
-        .catch(() => {
-          loading.value = false
-          toast.error('錯誤請通知工程師')
-        })
-    }
-
-
-
-    const copy = () => {
-      clipboard(result.value)
-      toast.success('複製成功')
-    }
-
-
-    const select = event => {
-      event.target.select()
-    }
-
-    return {
-      input,
-      subIds,
-      loading,
-      result,
-      clear,
-      copy,
-      submitHandler,
-      select
-    }
+  {
+    value: ''
+  },
+  {
+    value: ''
+  },
+  {
+    value: ''
+  },
+  {
+    value: ''
   }
+])
+const select = event => {
+  event.target.select()
+}
+
+const loading = ref(false)
+const submit = () => {
+  if (loading.value) return
+  result.value = ''
+  if (input.value === '') {
+    toast.warning('請填入蝦皮網址')
+    return
+  } else if (!input.value.match(/https\:\/\/shopee\.tw/)) {
+    toast.warning('非蝦皮網址')
+    return
+  }
+  loading.value = true
+
+  let str = ''
+  subIds.value.forEach((item, index) => {
+    str += `id` + index + '=' + item.value + '&'
+  })
+
+  api.shortLink(input.value, str)
+    .then(res => {
+      result.value = res
+      const arr = subIds.value.map(item => item.value)
+      store.addLink({
+        url: res,
+        subIds: [...arr]
+      })
+      loading.value = false
+    })
+    .catch(() => {
+      loading.value = false
+      toast.error('錯誤請通知工程師')
+    })
+}
+
+const copy = () => {
+  clipboard(result.value)
+  toast.success('複製成功')
+}
+
+const clear = () => {
+  input.value = ''
+  subIds.value.forEach(item => item.value = '')
+  toast.info('清除')
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../assets/scss/mixin.scss";
-@import "../assets/scss/media.scss";
-@import "../assets/scss/color.scss";
-@import "../assets/scss/transition.scss";
-.main {
-  width: 90%;
-  margin: auto;
-  max-width: 600px;
-  .row {
-    @include box;
-    .row-title {
-      font-size: 1.5rem;
-      line-height: 2;
-      font-weight: bold;
-      color: $font;
-    }
-    .detail {
-      line-height: 1;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      .link {
-        color: $font;
-        &:hover {
-          color: $sub;
-        }
-      }
-    }
-    .row-content {
-      .user-input {
-        font-family: "Roboto Mono", monospace;
-        width: 100%;
-        border: none;
-        -webkit-appearance: none;
-        box-shadow: 0 0 0 1.5px #3dbe8a;
-        color: $font;
-        &::placeholder {
-          color: $holder;
-        }
-        font-size: 1rem;
-        line-height: 1.5;
-        padding: 0.7rem;
-        border-radius: 0.5rem;
-        box-sizing: border-box;
-        transition: box-shadow 0.3s ease;
-        outline: none;
-        &:focus {
-          box-shadow: 0 0 0 5px #3dbe8a;
-        }
-        &:invalid {
-          box-shadow: 0 0 0 5px #f22;
-        }
-      }
-    }
-    .row-sub {
-      width: 100%;
-      margin: 0 0 20px;
-      display: inline-block;
-    }
-    .btn-group {
-      text-align: center;
-      padding: 1.5rem 0 0;
-    }
-  }
+<template>
+  <section class="row mb-6">
+    <h2 class="font-bold text-lg md:text-xl mb-1" title="輸入網址">
+      輸入網址
+      <i class="bx bxs-hand-down"></i>
+    </h2>
+    <label class="py-2 block mb-2">
+      <input
+        type="url"
+        title="蝦皮網址"
+        placeholder="https://shopee.tw/"
+        pattern="https://shopee.tw/.*"
+        class="rounded-lg p-3 w-full placeholder:text-gray-400 outline-none invalid:ring-red-500 invalid:ring-4 ring-2 ring-green-500 focus:ring-4 transition"
+        v-model="input"
+        autofocus
+        @focus="select($event)"
+      />
+    </label>
+    <div class="text-center">
+      <input type="button" value="送出" @click="submit" class="btn bg-cyan-400" />
+      <input type="button" value="清除" @click="clear" class="btn bg-gray-500" />
+    </div>
+  </section>
+  <transition name="fade" mode="out-in">
+    <section class="row mb-6" v-if="result">
+      <h2 class="font-bold text-xl mb-1" title="已轉換網址">
+        已轉換網址
+        <i class="bx bx-happy-beaming"></i>
+      </h2>
+      <label class="py-2 block mb-2">
+        <input
+          type="url"
+          title="蝦皮網址"
+          disabled
+          @dblclick="select($event)"
+          :value="result"
+          class="rounded-lg p-3 w-full disabled:bg-gray-100 outline-none invalid:ring-red-500 invalid:ring-4 ring-2 ring-green-500 focus:ring-4 transition"
+        />
+      </label>
+      <div class="text-center">
+        <input type="button" value="複製" @click="copy" class="btn bg-green-700" />
+      </div>
+    </section>
+    <section class="row mb-6" v-else-if="loading">
+      <div class="text-center text-4xl">
+        <i class="bx bx-loader-alt bx-spin"></i>
+      </div>
+    </section>
+  </transition>
+  <section class="row">
+    <h3 class="font-bold text-xl mb-1" title="填入自訂連結標記">
+      填入記憶文字
+      <i class="bx bx-purchase-tag"></i>
+    </h3>
+    <p>使用於標記或區分短連結</p>
+    <p>
+      可以於
+      <router-link to="/record" class="path">
+        <i class="bx bx-clipboard"></i>轉換紀錄
+      </router-link>查看
+    </p>
+    <p>僅限英文+數字</p>
+    <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
+      <input type="text" :placeholder="'記憶文字 ' + (index + 1)" class="bar" v-model="item.value" />
+    </label>
+  </section>
+</template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

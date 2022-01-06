@@ -1,88 +1,44 @@
-<template>
-<div class="about">
-  <div class="card">
-    <figure>
-      <img src="../assets/author.jpg" alt="author">
-      <figcaption>
-        <a href="mailto:bobhus394@gmail.com">connectshark</a>
-      </figcaption>
-    </figure>
-    <p class="icons">
-      <a href="mailto:bobhus394@gmail.com" class="icon" title="聯繫" target="_blank">
-        <i class='bx bx-mail-send'></i>
-      </a>
-      <a href="javascript:;" class="icon" title="分享" @click.prevent="share">
-        <i class='bx bx-share-alt'></i>
-      </a>
-    </p>
-  </div>
-</div>
-</template>
-
-<script>
+<script setup>
 import { useToast } from 'vue-toastification'
-export default {
-  setup () {
-    const toast = useToast()
-    const share = () => {
-      if (navigator.share) {
-        navigator.share({
-          title: '蝦皮短網址服務',
-          text: '縮短蝦皮網站上的連結',
-          url: 'https://shopee.nosegates.com/',
-        }).then(() => {
-          toast.success('感謝分享!!')
-        })
-      }
-    }
-    return {
-      share
-    }
+const toast = useToast()
+const share = () => {
+  if (navigator.share) {
+    navigator.share({
+      title: '蝦皮短網址服務',
+      text: '縮短蝦皮網站上的連結',
+      url: 'https://shopee.nosegates.com/',
+    }).then(() => {
+      toast.success('感謝分享!!')
+    })
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/scss/mixin.scss';
-@import '../assets/scss/color.scss';
-.about{
-  width: 90%;
-  margin: auto;
-  max-width: 600px;
-  .card{
-    @include box;
-    .icons{
-      text-align: center;
-      .icon{
-        display: inline-block;
-        font-size: 30px;
-        color: $font;
-        margin: 0 5px;
-        transform: scale(1);
-        transition: transform .3s;
-        &:hover, &:active{
-          transform: scale(1.2);
-        }
-      }
-    }
-    figure{
-      text-align: center;
-      img{
-        width: 100px;
-        height: 100px;
-        vertical-align: middle;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-      figcaption{
-        a{
-          font-size: 20px;
-          line-height: 2;
-          text-decoration: none;
-          color: $font;
-        }
-      }
-    }
-  }
-}
-</style>
+<template>
+  <section class=" w-48 mx-auto rounded-2xl overflow-hidden bg-white text-center">
+    <figure>
+      <img src="../assets/author.jpg" class="rounded-br-[50px] w-full h-40 object-cover" alt="author" />
+      <figcaption>
+        <a href="mailto:bobhus394@gmail.com">chambers</a>
+      </figcaption>
+    </figure>
+    <div class="py-4 text-2xl">
+      <a
+        href="mailto:bobhus394@gmail.com"
+        class="inline-block transition mx-1.5 hover:scale-110 active:scale-110"
+        title="聯繫"
+        target="_blank"
+      >
+        <i class="bx bx-mail-send"></i>
+      </a>
+      <a
+        href="javascript:;"
+        class="inline-block transition mx-1.5 hover:scale-110 active:scale-110"
+        title="分享"
+        @click.prevent="share"
+      >
+        <i class="bx bx-share-alt"></i>
+      </a>
+    </div>
+  </section>
+</template>

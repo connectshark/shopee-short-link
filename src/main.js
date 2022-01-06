@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
-import router from './router'
-import store from './store'
+import { createPinia } from 'pinia'
+import './index.css'
 import App from './App.vue'
-import './assets/css/reset.css'
+import router from './router'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 const options = {
-  maxToasts: 5,
+  maxToasts: 3,
   newestOnTop: true,
   position: "bottom-center",
   timeout: 3000,
@@ -22,9 +22,9 @@ const options = {
 }
 
 
+const app = createApp(App)
 
-createApp(App)
+app.use(createPinia())
   .use(router)
-  .use(store)
   .use(Toast, options)
   .mount('#app')

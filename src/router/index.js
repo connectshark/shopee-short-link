@@ -4,6 +4,7 @@ const history = createWebHistory()
 
 const router = createRouter({
   history,
+  linkActiveClass: 'page-active',
   routes: [
     {
       path: '/',
@@ -13,12 +14,12 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/about.vue')
+      component: () => import('../views/About.vue')
     },
     {
       path: '/record',
       name: 'record',
-      component: () => import('../views/record.vue')
+      component: () => import('../views/Record.vue')
     },
     {
       path: '/:pathMatch(.*)*',

@@ -1,3 +1,7 @@
+import { defineStore } from 'pinia'
+
+const key = 'shortLink'
+
 /**
  * 設定localstorage資料
  */
@@ -27,4 +31,24 @@ const LS = {
 	}
 }
 
-export default LS
+export const useLinkStore = defineStore({
+  id: 'link',
+  state: () => ({
+    links: []
+  }),
+  getters: {
+  },
+  actions: {
+    initState () {
+      this.links = LS.load(key)
+    },
+    addLink (linkData) {
+      this.links.unshift(linkData)
+      LS.save(key, this.links)
+    },
+    deleteLink (index) {
+      this.links.splice(index, 1)
+      LS.save(key, this.links)
+    }
+  }
+})

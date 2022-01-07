@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import home from '../views/Home.vue'
+import about from '../views/About.vue'
+import record from '../views/Record.vue'
 const history = createWebHistory()
 
 const router = createRouter({
@@ -14,12 +16,12 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/About.vue')
+      component: about
     },
     {
       path: '/record',
       name: 'record',
-      component: () => import('../views/Record.vue')
+      component: record
     },
     {
       path: '/:pathMatch(.*)*',

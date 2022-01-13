@@ -1,9 +1,7 @@
 <template>
   <Banner />
   <main class="w-5/6 max-w-3xl mx-auto py-6">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view/>
   </main>
 </template>
 

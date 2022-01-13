@@ -6,8 +6,13 @@ const api = {
         .then(res => {
           resolve(res.data.generateShortLink.shortLink)
         })
-        .catch(() => {
-          reject()
+        .catch(err => {
+          const code = err[0].extensions.code
+          if (code === 11001) {
+            reject('記憶文字超過50字')
+          } else {
+            reject('稍待一下再嘗試')
+          }
         })
     })
   }

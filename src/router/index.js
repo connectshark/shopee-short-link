@@ -11,17 +11,26 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: home
+      component: home,
+      meta: {
+        title: '首頁'
+      }
     },
     {
       path: '/about',
       name: 'about',
-      component: about
+      component: about,
+      meta: {
+        title: '作者'
+      }
     },
     {
       path: '/record',
       name: 'record',
-      component: record
+      component: record,
+      meta: {
+        title: '轉換紀錄'
+      }
     },
     {
       path: '/:pathMatch(.*)*',

@@ -47,6 +47,9 @@ const submit = () => {
   subIds.value.forEach((item, index) => {
     str += `id` + index + '=' + item.value + '&'
   })
+  while (str.includes(' ')) {
+    str = str.replace(' ', '')
+  }
 
   api.shortLink(input.value, str)
     .then(res => {
@@ -58,9 +61,9 @@ const submit = () => {
       })
       loading.value = false
     })
-    .catch(() => {
+    .catch(err => {
       loading.value = false
-      toast.error('錯誤請通知工程師')
+      toast.error(err)
     })
 }
 
@@ -139,7 +142,7 @@ const clear = () => {
     </p>
     <p>僅限英文+數字</p>
     <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
-      <input type="text" :placeholder="'記憶文字 ' + (index + 1)" class="bar" v-model="item.value" />
+      <input type="text" :placeholder="'記憶文字 ' + (index + 1)" class="bar" v-model="item.value" maxlength="50" />
     </label>
   </section>
 </template>

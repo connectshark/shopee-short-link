@@ -1,5 +1,8 @@
 # 蝦皮縮網址使用說明
 
+[![GitHub last commit](https://img.shields.io/github/last-commit/connectshark/shopee-short-link.svg?style=flat)](https://github.com/connectshark/shopee-short-link)
+![GitHub stars](https://img.shields.io/github/stars/connectshark/shopee-short-link.svg?style=social&label=Stars&style=plastic)
+
 蝦皮縮網址服務是一個良好縮短中文網址的服務
 
 

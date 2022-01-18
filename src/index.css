@@ -17,3 +17,7 @@
 .row{
   @apply p-4 rounded-2xl shadow bg-white;
 }
+
+.min-content{
+  min-height: calc(100vh - 124px);
+}

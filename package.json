@@ -1,6 +1,6 @@
 {
   "name": "shopee-short-link",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "copy-text-to-clipboard": "^3.0.1",
+    "dayjs": "^1.10.7",
     "pinia": "^2.0.9",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12",

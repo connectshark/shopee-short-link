@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import api from '../hook/api'
+import dayjs from 'dayjs'
 import { useLinkStore } from '../stores/link'
 import clipboard from 'copy-text-to-clipboard'
 const toast = useToast()
@@ -43,13 +44,8 @@ const submit = () => {
   }
   loading.value = true
 
-  let str = ''
-  subIds.value.forEach((item, index) => {
-    str += `id` + index + '=' + item.value + '&'
-  })
-  while (str.includes(' ')) {
-    str = str.replace(' ', '')
-  }
+  const time = dayjs().format('MMoDDoHHoMM')
+  let str = `id0=${time}&id1=&id2=&id3=&id4=`
 
   api.shortLink(input.value, str)
     .then(res => {
@@ -98,7 +94,7 @@ const clear = () => {
       />
     </label>
     <div class="text-center">
-      <input type="button" value="送出" @click="submit" class="btn bg-cyan-400" />
+      <input type="button" value="送出" @click="submit" class="btn bg-sky-500" />
       <input type="button" value="清除" @click="clear" class="btn bg-gray-500" />
     </div>
   </section>
@@ -133,28 +129,17 @@ const clear = () => {
       填入記憶文字
       <i class="bx bx-purchase-tag"></i>
     </h3>
-    <p>使用於標記或區分短連結</p>
+    <p>填入<span class=" text-red-400">任意文字</span>幫助記憶該連結的內容</p>
     <p>
       可以於
       <router-link to="/record" class="path">
         <i class="bx bx-clipboard"></i>轉換紀錄
       </router-link>查看
     </p>
-    <p>僅限英文+數字</p>
     <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
-      <input type="text" :placeholder="'記憶文字 ' + (index + 1)" class="bar" v-model="item.value" maxlength="50" />
+      <input type="text" placeholder="任意文字(中英表情符號皆可)" class="bar" v-model="item.value" maxlength="50" />
     </label>
   </section>
 </template>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<style src="../assets/css/transition.css"></style>

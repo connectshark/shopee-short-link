@@ -22,42 +22,45 @@ const del = linkIndex => {
       轉換紀錄
       <i class="bx bx-note"></i>
     </h2>
-    <ul v-if="store.links.length > 0">
-      <li
-      v-for="(link, i) in store.links" :key="i"
-        class="flex items-center justify-center flex-row flex-wrap py-4 border-b border-gray-200 last:border-none"
-      >
-        <p class="w-2/3">
-          <span class="bg-gray-200 p-1 rounded-md">{{ link.url }}</span>
+    <transition name="fade" mode="out-in">
+      <transition-group name="slide" appear mode="out-in" tag="ul" v-if="store.links.length > 0">
+        <li
+          v-for="(link, i) in store.links"
+          :key="i"
+          class="flex items-center justify-center flex-row flex-wrap py-4 border-b border-gray-200 last:border-none"
+        >
+          <p class="w-2/3">
+            <span class="bg-gray-200 p-1 rounded-md">{{ link.url }}</span>
+          </p>
+          <p class="w-1/3 text-center text-xl">
+            <i
+              class="inline-block mx-1 bx bx-x-circle bx-tada-hover cursor-pointer active:text-yellow-700 transition"
+              title="delete"
+              @click="del(i)"
+            ></i>
+            <i
+              class="inline-block mx-1 bx bx-copy-alt bx-tada-hover cursor-pointer active:text-yellow-700 transition"
+              title="copy"
+              @click="copy(link.url)"
+            ></i>
+          </p>
+          <p class="w-full pt-3">
+            <template v-for="(sub, subI) in link.subIds" :key="subI">
+              <span
+                v-if="sub"
+                class="text-white p-1 m-1 rounded-lg inline-block text-xs bg-gray-600"
+              >{{ sub }}</span>
+            </template>
+          </p>
+        </li>
+      </transition-group>
+      <div class="text-center" v-else>
+        <p class="text-4xl">
+          <i class="bx bx-wink-smile bx-spin"></i>
         </p>
-        <p class="w-1/3 text-center text-xl">
-          <i
-            class="inline-block mx-1 bx bx-x-circle bx-tada-hover cursor-pointer active:text-yellow-700 transition"
-            title="delete"
-            @click="del(i)"
-          ></i>
-          <i
-            class="inline-block mx-1 bx bx-copy-alt bx-tada-hover cursor-pointer active:text-yellow-700 transition"
-            title="copy"
-            @click="copy(link.url)"
-          ></i>
-        </p>
-        <p class="w-full pt-3">
-        <template
-            v-for="(sub, subI) in link.subIds"
-            :key="subI">
-          <span
-          v-if="sub"
-            class="text-white p-1 m-1 rounded-lg inline-block text-xs bg-gray-600"
-          >{{ sub }}</span>
-        
-        </template>
-        </p>
-      </li>
-    </ul>
-    <div class=" text-center" v-else>
-      <p class=" text-4xl"><i class='bx bx-wink-smile bx-spin'></i></p>
-      <p>無紀錄</p>
-    </div>
+        <p>無紀錄</p>
+      </div>
+    </transition>
   </section>
 </template>
+<style src="../assets/css/transition.css"></style>

@@ -44,7 +44,7 @@ const submit = () => {
   }
   loading.value = true
 
-  const time = dayjs().format('MMoDDoHHoMM')
+  const time = dayjs().format('MMoDDoHHomm')
   let str = `id0=${time}&id1=&id2=&id3=&id4=`
 
   api.shortLink(input.value, str)

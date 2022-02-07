@@ -9,9 +9,11 @@ export default defineConfig({
   plugins: [
     vue(),
     ViteRadar({
-      analytics: {
-        id: 'G-J6P3NCP3ZW',
-      },
+      gtm: [
+        {
+          id: 'GTM-PVFR7S2',
+        }
+      ]
     })
   ],
   resolve: {

@@ -94,7 +94,7 @@ const clear = () => {
       />
     </label>
     <div class="text-center">
-      <input type="button" value="送出" @click="submit" class="btn bg-sky-500" />
+      <input type="button" value="送出" @click="submit" class="btn bg-sky-600" />
       <input type="button" value="清除" @click="clear" class="btn bg-gray-500" />
     </div>
   </section>

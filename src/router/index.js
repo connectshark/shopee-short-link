@@ -26,9 +26,19 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
+      meta: {
+        title: '無頁面'
+      },
       component: () => import('../views/404.vue')
     },
   ]
 })
-
+const defaultDocumentTitle = '蝦皮短網址服務'
+router.afterEach(to => {
+  if (to.meta?.title) {
+    document.title = `${to.meta.title} — ${defaultDocumentTitle}`
+  } else {
+    document.title = defaultDocumentTitle
+  }
+})
 export default router

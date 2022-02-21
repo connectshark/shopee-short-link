@@ -6,6 +6,15 @@
     "build": "vite build",
     "preview": "vite preview --port 5050"
   },
+  "homepage": "https://shopee.nosegates.com/",
+  "author": {
+    "name": "Chambers",
+    "email": "bobhus394@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/connectshark/shopee-short-link",
+    "type": "git"
+  },
   "dependencies": {
     "copy-text-to-clipboard": "^3.0.1",
     "dayjs": "^1.10.7",

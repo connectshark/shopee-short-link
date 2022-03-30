@@ -20,7 +20,7 @@
             <a
               href="javascript:;"
               class="block transition mx-1.5 hover:scale-110 active:scale-110"
-              title="分享"
+              title="分享此站給所有人"
               @click.prevent="share"
             >
               <i class="bx bx-share-alt"></i>
@@ -44,7 +44,7 @@ const share = () => {
   if (navigator.share) {
     navigator.share({
       title: '蝦皮短網址服務',
-      text: '縮短蝦皮網站上的連結',
+      text: '分享給你一個蝦皮專用的縮短連結網站 試用看看',
       url: 'https://shopee.nosegates.com/',
     }).then(() => {
       toast.success('感謝分享!!')

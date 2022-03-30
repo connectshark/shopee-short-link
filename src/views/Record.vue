@@ -18,10 +18,7 @@ const del = linkIndex => {
 
 <template>
   <section class="row">
-    <h2 class="font-bold text-lg md:text-xl mb-1" title="輸入網址">
-      轉換紀錄
-      <i class="bx bx-note"></i>
-    </h2>
+    <h2 class="font-bold text-lg md:text-xl mb-1" title="輸入網址">轉換紀錄🔖</h2>
     <transition name="fade" mode="out-in">
       <transition-group name="slide" appear mode="out-in" tag="ul" v-if="store.links.length > 0">
         <li

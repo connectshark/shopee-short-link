@@ -11,7 +11,7 @@ const store = useLinkStore()
 const input = ref('')
 const result = ref('')
 const lineShareLink = computed(() => `https://social-plugins.line.me/lineit/share?url=` + result.value)
-const fbShareLink = computed(() => `http://www.facebook.com/share.php?u=` + result.value)
+const fbShareLink = computed(() => `https://www.facebook.com/sharer/sharer.php?u=` + result.value)
 const subIds = ref([
   {
     value: ''

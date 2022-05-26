@@ -1,8 +1,11 @@
 <template>
   <header class="bg-gray-800">
     <div class="text-white flex items-center justify-between max-w-3xl mx-auto p-4">
-      <h1 class="text-2xl md:text-3xl font-bold">
-        <router-link to="/">蝦皮短網址服務</router-link>
+      <h1 class="text-2xl font-bold">
+        <router-link to="/">
+          <img class=" inline-block align-middle" src="../assets/icon.png" alt="icon">
+          <span class=" inline-block align-middle">蝦英雄</span>
+        </router-link>
       </h1>
       <nav class="nav">
         <ul>

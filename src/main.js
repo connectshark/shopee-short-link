@@ -6,7 +6,7 @@ import router from './router'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 const options = {
-  maxToasts: 3,
+  maxToasts: 1,
   newestOnTop: true,
   position: "bottom-center",
   timeout: 3000,

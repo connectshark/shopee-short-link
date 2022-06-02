@@ -98,7 +98,7 @@ const share = () => {
         title="蝦皮網址"
         placeholder="https://shopee.tw/"
         pattern="https://shopee.tw/.*"
-        class="rounded-lg p-3 w-full appearance-none placeholder:text-gray-400 outline-none invalid:ring-red-500 invalid:ring-4 ring-2 ring-green-500 focus:ring-4 transition"
+        class="rounded-lg p-3 w-full appearance-none placeholder:text-gray-400 outline-none invalid:ring-red-500 invalid:ring-4 ring-2 ring-purple-400 focus:ring-4 transition"
         v-model="input"
         autofocus
         @focus="select($event)"

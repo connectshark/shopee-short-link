@@ -3,7 +3,7 @@ const copyright = `Copyright©2022 All Rights Reserved.`
 </script>
 
 <template>
-  <footer class="bg-indigo-900 text-white py-10 text-center text-sm">
+  <footer class="bg-slate-900 text-white py-10 text-center text-sm">
     <p class="max-w-3xl mx-auto">{{ copyright }}</p>
     <p class="max-w-3xl mx-auto">
       <a

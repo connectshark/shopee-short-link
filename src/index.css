@@ -11,7 +11,7 @@
 }
 
 .bar{
-  @apply rounded-lg p-3 w-full placeholder:text-gray-400 outline-none ring-2 ring-green-500 focus:ring-4 appearance-none transition;
+  @apply rounded-lg p-3 w-full placeholder:text-gray-400 outline-none ring-2 ring-amber-200 focus:ring-4 appearance-none transition;
 }
 
 .row{

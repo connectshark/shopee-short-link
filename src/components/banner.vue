@@ -1,10 +1,10 @@
 <template>
-  <header class="bg-gray-800">
+  <header class="bg-neutral-700">
     <div class="text-white flex items-center justify-between max-w-3xl mx-auto p-4">
       <h1 class="text-2xl font-bold">
         <router-link to="/">
           <img class=" inline-block align-middle" src="../assets/icon.png" alt="icon">
-          <span class=" inline-block align-middle">蝦英雄</span>
+          <span class=" hover:scale-105 inline-block align-middle transition-transform duration-1000">蝦英雄</span>
         </router-link>
       </h1>
       <nav class="nav">

@@ -143,7 +143,7 @@ const share = () => {
       </div>
     </section>
   </transition>
-  <section class="row">
+  <section class="row mb-6">
     <h3 class="font-bold text-xl mb-1" title="填入自訂連結標記">填入記憶文字💡</h3>
     <p>填入<span class=" text-red-400">任意文字</span>幫助記憶該連結的內容</p>
     <p>

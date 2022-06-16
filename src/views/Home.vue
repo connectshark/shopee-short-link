@@ -56,6 +56,8 @@ const submit = () => {
         subIds: [...arr]
       })
       loading.value = false
+      input.value = ''
+      subIds.value.forEach(item => item.value = '')
     })
     .catch(err => {
       loading.value = false

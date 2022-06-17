@@ -12,7 +12,7 @@ const router = createRouter({
       name: 'home',
       component: home,
       meta: {
-        title: '首頁'
+        title: ''
       }
     },
     {
@@ -33,10 +33,10 @@ const router = createRouter({
     },
   ]
 })
-const defaultDocumentTitle = '蝦英雄'
+const defaultDocumentTitle = '蝦英雄 蝦皮縮網址網站'
 router.afterEach(to => {
   if (to.meta?.title) {
-    document.title = `${to.meta.title} — ${defaultDocumentTitle}`
+    document.title = `${to.meta.title} | ${defaultDocumentTitle}`
   } else {
     document.title = defaultDocumentTitle
   }

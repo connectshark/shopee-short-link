@@ -91,9 +91,11 @@ const share = () => {
 
 <template>
   <section class="row mb-6">
-    <h2 class="font-bold text-lg md:text-xl mb-1" title="輸入網址">
-      輸入網址📝
-    </h2>
+  <div>
+    <h2 class="font-bold text-lg md:text-xl mb-1 inline-block align-middle" title="輸入網址">輸入網址📝</h2>
+    <a href="#how" class=" text-sm font-normal inline-block align-middle text-stone-500 hover:text-stone-700 cursor-pointer">縮網址好處?</a>
+  </div>
+    
     <label class="py-2 block mb-2">
       <input
         type="url"
@@ -146,7 +148,7 @@ const share = () => {
     </section>
   </transition>
   <section class="row mb-6">
-    <h3 class="font-bold text-xl mb-1" title="填入自訂連結標記">填入記憶文字💡</h3>
+    <h3 class="font-bold text-xl mb-1" title="填入記憶文字">填入記憶文字💡</h3>
     <p>填入<span class=" text-red-400">任意文字</span>幫助記憶該連結的內容</p>
     <p>
       可以於
@@ -157,6 +159,14 @@ const share = () => {
     <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
       <input type="text" placeholder="任意文字" class="bar" v-model="item.value" maxlength="50" />
     </label>
+  </section>
+  <section class="row mb-6">
+    <h3 id="how" class="font-bold text-xl mb-1" title="縮網址的好處">使用蝦英雄的好處</h3>
+    <ul class="list-disc ml-4 text-stone-600">
+      <li>點擊即開啟APP</li>
+      <li>簡短成更適合社群平台的長度</li>
+      <li>保留原賣場＆商品的預覽內容</li>
+    </ul>
   </section>
 </template>
 

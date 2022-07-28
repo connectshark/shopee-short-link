@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL
 const api = {
   shortLink (url, subIds) {
     return new Promise((resolve, reject) => {
-      fetch(API_URL + `/shopee?input=${url}&${subIds}`)
+      fetch(API_URL + `/shopee/getShortLink?input=${url}&${subIds}`)
         .then(res => res.json())
         .then(res => {
           resolve(res.data.generateShortLink.shortLink)

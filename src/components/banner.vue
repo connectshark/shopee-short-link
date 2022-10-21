@@ -1,6 +1,6 @@
 <template>
   <header class="bg-neutral-700">
-    <div class="text-white flex items-center justify-between max-w-3xl mx-auto p-4">
+    <div class="text-white flex items-center justify-between max-w-lg mx-auto p-4">
       <h1 class="text-2xl font-bold">
         <router-link to="/">
           <img class=" inline-block align-middle" src="../assets/icon.png" alt="icon">
@@ -24,7 +24,7 @@
               href="javascript:;"
               class="block transition mx-1.5 hover:scale-110 active:scale-110"
               title="分享此站給所有人"
-              @click.prevent="share"
+              @click.prevent="startShare"
             >
               <i class="bx bx-share-alt"></i>
             </a>
@@ -37,20 +37,21 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { useToast } from 'vue-toastification'
+import { useShare } from '@vueuse/core'
 const route = useRoute()
+
 const navs = [
   { name: 'bx-clipboard', url: '/record', text: '轉換紀錄', id: 'record' }
 ]
-const toast = useToast()
-const share = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: '蝦皮短網址服務',
-      text: '分享給你一個蝦皮專用的縮短連結網站 試用看看',
-      url: 'https://shopee.nosegates.com/',
-    }).then(() => {
-      toast.success('感謝分享!!')
+
+
+const { share, isSupported } = useShare()
+const startShare = () => {
+  if (isSupported) {
+    share({
+      title: '蝦英雄 | 蝦皮短網址服務',
+      text: '分享給你一個蝦皮短網址網站',
+      url: 'https://shopee.nosegates.com/'
     })
   }
 }

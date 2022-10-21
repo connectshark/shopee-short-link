@@ -13,7 +13,8 @@ https://shopee.tw/
 複製後前往網站連結 > https://shopee.nosegates.com/
 
 ---
-
+## 專案活動紀錄
+![Alt](https://repobeats.axiom.co/api/embed/211955b4bb0f54c6a00787372130a2fe7f7409c4.svg "Repobeats analytics image")
 ## 目錄
 - [專案使用技術](#專案使用技術)
 - [各頁面介紹](#各頁面介紹)
@@ -48,3 +49,4 @@ https://shopee.tw/
 查詢過往縮短過的網址
 
 可以再次複製網址&刪除紀錄
+

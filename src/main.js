@@ -9,7 +9,7 @@ const options = {
   maxToasts: 1,
   newestOnTop: true,
   position: "bottom-center",
-  timeout: 3000,
+  timeout: 1000,
   closeOnClick: true,
   pauseOnFocusLoss: false,
   pauseOnHover: false,

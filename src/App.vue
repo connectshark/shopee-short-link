@@ -1,6 +1,6 @@
 <template>
   <Banner />
-  <main class="w-5/6 max-w-3xl mx-auto py-6 min-content">
+  <main class="w-5/6 max-w-lg mx-auto py-6 min-content">
     <router-view/>
   </main>
   <FooterWrapper/>

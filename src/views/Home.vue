@@ -131,7 +131,7 @@ const startShare = () => {
       </div>
     </section>
   </transition>
-  <section class="row mb-6" ref="wrapperEl">
+  <section class="row mb-6">
     <h3 class="font-bold text-xl mb-1 text-stone-600" title="填入記憶文字">填入記憶文字💡</h3>
     <p>填入<span class=" text-red-400">任意文字</span>幫助記憶該連結的內容</p>
     <p>
@@ -140,14 +140,16 @@ const startShare = () => {
         <i class="bx bx-clipboard"></i>轉換紀錄
       </router-link>查看
     </p>
-    <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
-      <input type="text" placeholder="任意文字" class="bar" v-model="item.value" maxlength="50" />
-    </label>
-    <p class=" text-center" v-if="subIds.length < 5">
-      <button type="button" @click.prevent="addCol" class=" hover:opacity-80 text-stone-600">
-        <i class='bx bx-md bx-list-plus'></i>
-      </button>
-    </p>
+    <div ref="wrapperEl">
+      <label class="py-2 block" v-for="(item, index) in subIds" :key="index">
+        <input type="text" placeholder="任意文字" class="bar" v-model="item.value" maxlength="50" />
+      </label>
+      <p class=" text-center" v-if="subIds.length < 5">
+        <button type="button" @click.prevent="addCol" class=" hover:opacity-80 text-stone-600">
+          <i class='bx bx-md bx-list-plus'></i>
+        </button>
+      </p>
+    </div>
   </section>
   <section class="row mb-6">
     <h3 id="how" class="font-bold text-xl mb-1 text-stone-600" title="縮網址的好處">短連結的優點</h3>
@@ -159,6 +161,4 @@ const startShare = () => {
   </section>
 </template>
 
-<style src="../assets/css/transition.css">
-
-</style>
+<style src="../assets/css/transition.css"></style>

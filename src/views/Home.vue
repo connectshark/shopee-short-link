@@ -70,6 +70,12 @@ const { copied, copy } = useClipboard({
   copiedDuring: 2000
 })
 
+watch(copied, value => {
+  if (value) {
+    toast.success('複製成功！')
+  }
+})
+
 const { share, isSupported } = useShare()
 
 const startShare = () => {

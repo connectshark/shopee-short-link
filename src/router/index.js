@@ -33,12 +33,12 @@ const router = createRouter({
     },
   ]
 })
-const defaultDocumentTitle = '蝦英雄 蝦皮縮網址網站'
-router.afterEach(to => {
+const defaultDocumentTitle = ' | 蝦皮縮網址網站'
+router.beforeEach(to => {
   if (to.meta?.title) {
-    document.title = `${to.meta.title} | ${defaultDocumentTitle}`
+    document.title = `${to.meta.title}` + defaultDocumentTitle
   } else {
-    document.title = defaultDocumentTitle
+    document.title = `蝦英雄` + defaultDocumentTitle
   }
 })
 export default router

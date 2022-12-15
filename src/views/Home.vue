@@ -7,6 +7,7 @@ import { useLinkStore } from '../stores/link'
 import { useClipboard, useShare, useDateFormat, useNow } from '@vueuse/core'
 import { useShopeeLink } from '../composable/getShortLink'
 import { useAutoAnimate } from '@formkit/auto-animate/vue'
+import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 const [ wrapperEl ] = useAutoAnimate()
 const toast = useToast()
@@ -29,7 +30,12 @@ const select = event => {
 }
 
 const time = useDateFormat(useNow(), 'MMoDDoHHomm')
-const { loading, getLink, result, error } = useShopeeLink({ time })
+const {
+  loading,
+  getLink,
+  result,
+  error
+} = useShopeeLink({ time })
 
 watch(result, value => {
   if (value !== null) {
@@ -47,6 +53,7 @@ watch(error, value => {
   }
 })
 
+const qrcode = useQRCode(result)
 
 const submit = () => {
   if (loading.value) return
@@ -116,18 +123,21 @@ const startShare = () => {
           class="rounded-lg p-3 w-full bg-gray-100 outline-none ring-2 ring-green-500 transition select-text" />
       </label>
       <div class="mb-2 flex justify-evenly">
-        <button type="button" class=" hover:opacity-80" @click="startShare">
-          <i class='bx bx-share-alt bx-md'></i>
+        <a class="text-3xl hover:opacity-80" :href="qrcode" download="qrcode" title="下載QRcode">
+          <i class='bx bx-qr-scan'></i>
+        </a>
+        <button type="button" class="text-3xl hover:opacity-80" @click="startShare">
+          <i class='bx bx-share-alt'></i>
         </button>
-        <a class=" hover:opacity-80" :href="'https://www.facebook.com/sharer/sharer.php?u=' + result" target="_blank">
+        <a class="hover:opacity-80" :href="'https://www.facebook.com/sharer.php?u=' + result" target="_blank" title="分享至FB">
           <FacebookBrand/>
         </a>
-        <a class=" hover:opacity-80" :href="'https://social-plugins.line.me/lineit/share?url=' + result" target="_blank">
+        <a class="hover:opacity-80" :href="'https://social-plugins.line.me/lineit/share?url=' + result" target="_blank" title="分享至Line">
           <LineBrand/>
         </a>
-        <button type="button" class=" hover:opacity-80" @click="copy()">
-          <i v-if="copied" class='bx bx-md bxs-copy-alt'></i>
-          <i v-else class='bx bx-md bx-copy-alt'></i>
+        <button type="button" class="text-3xl hover:opacity-80" @click="copy()" title="直接複製URL">
+          <i v-if="copied" class='bx bxs-copy-alt'></i>
+          <i v-else class='bx bx-copy-alt'></i>
         </button>
       </div>
     </section>

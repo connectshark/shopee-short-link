@@ -68,10 +68,6 @@ const submit = () => {
   getLink({ url: input.value })
 }
 
-const clearInput = () => {
-  input.value = ''
-}
-
 const { copied, copy } = useClipboard({
   source: result,
   copiedDuring: 2000
@@ -89,7 +85,7 @@ const startShare = () => {
   if (isSupported) {
     share({
       title: '蝦英雄 | 蝦皮短網址服務',
-      text: '分享一個蝦皮短網址給妳',
+      text: '分享一個蝦皮短網址',
       url: result.value
     })
   }
@@ -112,7 +108,7 @@ const startShare = () => {
     </label>
     <div class="text-center">
       <input type="submit" value="送出" class="btn bg-sky-600" />
-      <input type="button" value="清除" @click="clearInput" class="btn bg-gray-500" />
+      <input type="reset" value="清除" class="btn bg-gray-500" />
     </div>
   </form>
   <transition name="fade" mode="out-in">

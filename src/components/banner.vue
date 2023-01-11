@@ -1,10 +1,10 @@
 <template>
   <header class="bg-neutral-700">
     <div class="text-white flex items-center justify-between max-w-lg mx-auto p-4">
-      <h1 class="text-2xl font-bold">
+      <h1>
         <router-link to="/">
-          <img class=" inline-block align-middle" src="../assets/icon.png" alt="icon">
-          <span class=" hover:scale-105 inline-block align-middle transition-transform duration-1000">蝦英雄</span>
+          <img class=" inline-block align-middle" src="../assets/icon.png" alt="app logo">
+          <span class="hover:scale-105 inline-block align-middle transition-transform text-2xl font-bold">蝦英雄</span>
         </router-link>
       </h1>
       <nav class="nav">

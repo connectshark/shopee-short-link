@@ -1,5 +1,5 @@
 <script setup>
-const copyright = `Copyright©2022 All Rights Reserved.`
+const copyright = `Copyright©2022-2023 All Rights Reserved.`
 </script>
 
 <template>

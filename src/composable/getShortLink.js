@@ -3,7 +3,7 @@ import { ref, unref } from 'vue'
 const API_URL = import.meta.env.VITE_API_URL
 
 export const useShopeeLink = ({ time }) => {
-  const result = ref(null)
+  const result = ref('')
   const loading = ref(false)
   const error = ref(null)
   const fetchShopeeLink = ({url}) => {

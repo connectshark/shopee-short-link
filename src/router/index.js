@@ -5,6 +5,11 @@ const history = createWebHistory()
 
 const router = createRouter({
   history,
+  scrollBehavior () {
+    return {
+      top: 0
+    }
+  },
   linkActiveClass: 'page-active',
   routes: [
     {
@@ -21,6 +26,14 @@ const router = createRouter({
       component: record,
       meta: {
         title: '轉換紀錄'
+      }
+    },
+    {
+      path: '/disclaimer',
+      name: 'disclaimer',
+      component: () => import('../views/disclaimer.vue'),
+      meta: {
+        title: '免責聲明'
       }
     },
     {

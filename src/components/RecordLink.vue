@@ -1,11 +1,11 @@
 <template>
-  <li class="py-4 border-b border-gray-200 last:border-none">
+  <li class="mb-10 last:mb-0">
     <p class="mb-2">
-      <span class="bg-gray-200 p-1 rounded-md">{{ props.url }}</span>
+      <span class="bg-tertiary-container p-3 rounded-lg text-tertiary inline-block select-all">{{ props.url }}</span>
     </p>
     <p class="mb-2" v-if="props.subIds.length > 0">
       <template v-for="sub in props.subIds" :key="sub.index">
-        <span v-if="sub" class="text-white p-1 m-1 rounded-lg inline-block text-xs bg-gray-600">{{ sub }}</span>
+        <span v-if="sub" class="text-white p-1 m-1 rounded-lg inline-block bg-gray-600">{{ sub }}</span>
       </template>
     </p>
     <p>

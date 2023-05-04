@@ -1,6 +1,8 @@
 <template>
-  <section class="row my-5 text-center">
-    <h2 class=" text-4xl py-4">無此頁</h2>
-    <router-link to="/" class=" text-xl underline path">回首頁</router-link>
+  <section class="p-10">
+    <h2 class="mb-16 text-2xl">無此頁</h2>
+    <p class=" text-center">
+      <router-link to="/" class=" underline">回首頁</router-link>
+    </p>
   </section>
 </template>

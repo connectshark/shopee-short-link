@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-surface-variant">
+  <footer class="bg-surface-variant text-sm">
     <div class="max-w-lg mx-auto py-10 w-11/12 grid gap-10 grid-cols-2">
       <div>
         <router-link to="/">{{ new Date().getFullYear() }}<i class='bx bx-copyright'></i>蝦英雄</router-link>

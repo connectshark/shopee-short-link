@@ -18,7 +18,7 @@ module.exports = {
         'main': 'rgb(var(--main) / <alpha-value>)'
       },
       minHeight: {
-        'content': 'calc(100svh - 364px)'
+        'content': 'calc(100svh - 468px)'
       }
     },
     fontFamily: {

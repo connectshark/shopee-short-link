@@ -3,28 +3,10 @@ import { createPinia } from 'pinia'
 import './index.css'
 import App from './App.vue'
 import router from './router'
-import Toast from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
-const options = {
-  maxToasts: 1,
-  newestOnTop: true,
-  position: "bottom-center",
-  timeout: 1000,
-  closeOnClick: true,
-  pauseOnFocusLoss: false,
-  pauseOnHover: false,
-  draggable: false,
-  showCloseButtonOnHover: false,
-  hideProgressBar: true,
-  closeButton: false,
-  icon: true,
-  rtl: false
-}
 
 
 const app = createApp(App)
 
 app.use(createPinia())
   .use(router)
-  .use(Toast, options)
   .mount('#app')

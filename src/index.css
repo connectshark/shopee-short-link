@@ -2,22 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn{
-  @apply active:opacity-80 inline-block text-base mx-2 rounded-lg text-white py-2 px-7 cursor-pointer hover:opacity-80 transition-opacity;
-}
-
-.path{
-  @apply hover:text-yellow-400 hover:underline;
-}
-
-.bar{
-  @apply rounded-lg p-3 w-full placeholder:text-gray-400 outline-none ring-2 ring-amber-200 focus:ring-4 appearance-none transition;
-}
-
-.row{
-  @apply p-4 rounded-2xl shadow bg-white;
-}
-
-.min-content{
-  min-height: calc(100vh - 184px);
+@layer {
+  :root {
+    --primary: 151 44 171;
+    --primary-container: 255 214 255;
+    --secondary: 108 88 107;
+    --secondary-container: 245 219 241;
+    --tertiary: 130 82 74;
+    --tertiary-container: 255 218 212;
+    --surface: 255 251 255;
+    --surface-variant: 236 223 232;
+    --main: 31 31 31;
+  }
 }

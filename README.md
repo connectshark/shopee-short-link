@@ -1,52 +1,40 @@
-# <img style="width: 28px; vertical-align: middle;" src="public/hero.png">蝦英雄(Shopee Short Link)
+# 蝦英雄
 [![GitHub last commit](https://img.shields.io/github/last-commit/connectshark/shopee-short-link.svg?style=flat)](https://github.com/connectshark/shopee-short-link)
 ![GitHub stars](https://img.shields.io/github/stars/connectshark/shopee-short-link.svg?style=social&label=Stars&style=plastic)
 
-![畫面截圖](https://i.imgur.com/UjprgXc.png)
+[en](/readme/en.md)
 
-> 網站串接蝦皮提供的api,將蝦皮網址貼入後送出,即可取得蝦皮短連結
 
-## 馬上試試
-```
-https://shopee.tw/
-```
-複製後前往網站連結 > https://shopee.nosegates.com/
+這是蝦英雄的前端專案，該專案是一個蝦皮縮網址網站，可以將`https://shopee.tw/`上的網址轉換成縮短後的網址。
 
----
-## 專案活動紀錄
-![Alt](https://repobeats.axiom.co/api/embed/211955b4bb0f54c6a00787372130a2fe7f7409c4.svg "Repobeats analytics image")
 ## 目錄
+- [總覽](#總覽)
+  - [截圖](#截圖)
+  - [網站連結](#網站連結)
 - [專案使用技術](#專案使用技術)
-- [各頁面介紹](#各頁面介紹)
----
+  - [網頁框架](#網頁框架)
+- [如何使用](#如何使用)
+- [版權](#版權)
+
+## 總覽
+### 截圖
+[![cover](/readme/cover.png)](https://shopee.nosegates.com/)
+### 網站連結
+蝦英雄網址：https://shopee.nosegates.com/
+
 ## 專案使用技術
 ### 網頁框架
-- vue
-- vue Router
-- pinia
-- vite
-- tailwindcss
+- Vue.js
+- Vue Router
+- Pinia
+- Vite
+- Tailwind CSS
 
-### CI & CD 工具
-- [render](https://render.com/)
----
-## 各頁面介紹
 
-### 首頁
+## 如何使用
+複製要縮短的網址，例如：https://shopee.tw/
 
-![首頁](https://i.imgur.com/UjprgXc.png)
+進入蝦英雄網站，將複製的網址貼上後，點擊送出按鈕，即可獲得縮短後的網址。
 
-首頁提供主要縮短網址功能
-
-下方欄位可為本次網址加上註記文字
-
-縮短網址**成功**以後即會將網址紀錄下來
-
-未來可以在[轉換紀錄](#轉換紀錄)頁面查看過往紀錄
-
-### 轉換紀錄
-
-查詢過往縮短過的網址
-
-可以再次複製網址&刪除紀錄
-
+## 版權
+專案採用的授權方式: [MIT](https://github.com/connectshark/shopee-short-link/blob/main/LICENSE)

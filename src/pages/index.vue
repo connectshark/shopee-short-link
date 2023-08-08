@@ -3,10 +3,12 @@ import { ref, watch } from 'vue'
 import { useLinkStore } from '../stores/link'
 import { useClipboard, useShare, useDateFormat, useNow } from '@vueuse/core'
 import useShopeeLink from '../composable/useShopeeLink'
-import { useAutoAnimate } from '@formkit/auto-animate/vue'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
+import { definePage } from 'vue-router/auto'
+definePage({
+  name: 'home'
+})
 
-const [ wrapperEl ] = useAutoAnimate()
 const store = useLinkStore()
 
 const input = ref('')
@@ -21,6 +23,11 @@ const addCol = () => {
 const subIds = ref([
   { value: '' }
 ])
+
+const vFocus = {
+  mounted: (el) => el.focus()
+}
+
 const select = event => {
   event.target.select()
 }
@@ -34,10 +41,12 @@ const {
 } = useShopeeLink({ time })
 
 watch(result, value => {
-  if (value !== null) {
+  if (value) {
+    const hadSubID = subIds.value.some(item => item.value) 
     store.addLink({
       url: value,
-      subIds: subIds.value.map(item => item.value)
+      subIds: hadSubID ? subIds.value.map(item => item.value) : [],
+      id: Date.now()
     })
     input.value = ''
     subIds.value.forEach(item => item.value = '')
@@ -76,9 +85,7 @@ const startShare = () => {
     <a href="#how" class="text-sm cursor-pointer ">縮網址好處?</a>
   </p>
   <label class="py-2 block mb-4 relative">
-    <input type="url" title="蝦皮網址" :disabled="loading" placeholder="https://shopee.tw/" pattern="^https://shopee\.tw/.*" required
-      class=" rounded-lg p-3 pr-8 w-full appearance-none outline-none ring-2 focus:ring-4 ring-primary transition disabled:bg-surface-variant"
-      v-model="input" @focus="select($event)" />
+    <input type="url" title="蝦皮網址" :disabled="loading" placeholder="https://shopee.tw/" pattern="^https://shopee\.tw/.*" required class=" rounded-lg p-3 pr-8 w-full appearance-none outline-none ring-2 focus:ring-4 ring-primary transition disabled:bg-surface-variant" v-model.trim="input" @focus="select($event)" v-focus />
     <button type="button" v-show="input && !loading" @click.stop="input = ''" class=" absolute right-1 top-5">
       <i class='bx bx-x-circle bx-sm align-middle'></i>
     </button>
@@ -124,9 +131,9 @@ const startShare = () => {
 <section class="bg-primary/10 p-10 rounded-2xl">
   <h3 class="mb-4 text-xl" title="填入記憶文字">記憶文字💡</h3>
   <p class="mb-4 text-sm">填入任意文字幫助記憶該連結的內容可以於<router-link to="/record" class="path"><i class="bx bx-clipboard"></i>紀錄</router-link>查看</p>
-  <div ref="wrapperEl">
+  <div>
     <label class="py-2 block mb-4" v-for="(item, index) in subIds" :key="index">
-      <input type="text" placeholder="任意文字" class="rounded-lg p-3 appearance-none placeholder:text-main/50 outline-none w-full ring-2 ring-secondary" v-model="item.value" maxlength="50" />
+      <input type="text" placeholder="任意文字" class="rounded-lg p-3 appearance-none placeholder:text-main/50 outline-none w-full ring-2 ring-secondary" v-model.trim="item.value" maxlength="50" />
     </label>
     <p class=" text-center" v-if="subIds.length < 5">
       <button type="button" @click.prevent="addCol" class=" hover:opacity-80">

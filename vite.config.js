@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url'
 import ViteRadar from 'vite-plugin-radar'
+import VueRouter from 'unplugin-vue-router/vite'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -13,7 +14,8 @@ export default defineConfig({
           id: 'GTM-PVFR7S2',
         }
       ]
-    })
+    }),
+    VueRouter()
   ],
   resolve: {
     alias: {

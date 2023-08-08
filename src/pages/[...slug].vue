@@ -6,3 +6,12 @@
     </p>
   </section>
 </template>
+<script setup>
+import { definePage } from 'vue-router/auto'
+definePage({
+  name: 'notFound',
+  meta: {
+    title: '無頁面'
+  }
+})
+</script>

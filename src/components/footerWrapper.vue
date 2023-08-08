@@ -2,7 +2,7 @@
   <footer class="bg-surface-variant text-sm text-main/80">
     <div class="max-w-lg mx-auto py-10 w-5/6 grid gap-10">
       <div>
-        <router-link to="/">{{ new Date().getFullYear() }}<i class='bx bx-copyright'></i>蝦英雄</router-link>
+        <router-link to="/"><i class='bx bx-copyright'></i>{{ new Date().getFullYear() }}蝦英雄</router-link>
       </div>
       <div>
         <p>

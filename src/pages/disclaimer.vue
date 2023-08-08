@@ -9,3 +9,13 @@
   <p class="leading-normal mb-8">本網站有權在任何時間修改本免責聲明，並且此類修改將在網站上公佈。使用者應該定期查閱本免責聲明，以確定對使用者的法律責任所造成的任何變更。</p>
 </section>
 </template>
+
+<script setup>
+import { definePage } from 'vue-router/auto'
+definePage({
+  name: 'disclaimer',
+  meta: {
+    title: '免責聲明'
+  }
+})
+</script>

@@ -15,7 +15,9 @@ export default defineConfig({
         }
       ]
     }),
-    VueRouter()
+    VueRouter({
+      importMode: (filepath) => filepath.includes('index') ? 'sync' : 'async'
+    })
   ],
   resolve: {
     alias: {

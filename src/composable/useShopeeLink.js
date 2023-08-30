@@ -11,10 +11,18 @@ export default function ({ time }) {
     loading.value = true
     result.value = ''
     error.value = ''
-    const subIds = `id0=${unref(time)}&id1=2023&id2=&id3=&id4=`
     
     try {
-      const response = await fetch(API_URL + `/shopee/getShortLink?input=${url}&${subIds}`)
+      const response = await fetch(API_URL + `/shopee/link`, {
+        method: 'POST',
+        body: JSON.stringify({
+          link: url,
+          time: unref(time)
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       if (!response.ok) {
         error.value = '稍後一下再嘗試'
       } else {

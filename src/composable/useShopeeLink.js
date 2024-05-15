@@ -7,7 +7,7 @@ export default function ({ time }) {
   const loading = ref(false)
   const error = ref('')
 
-  const fetchShopeeLink = async ({ url }) => {
+  const createLink = async ({ url }) => {
     loading.value = true
     result.value = ''
     error.value = ''
@@ -40,6 +40,6 @@ export default function ({ time }) {
     result,
     loading,
     error,
-    getLink: fetchShopeeLink
+    createLink
   }
 }

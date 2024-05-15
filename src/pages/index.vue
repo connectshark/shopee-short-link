@@ -5,6 +5,8 @@ import { useClipboard, useShare, useDateFormat, useNow } from '@vueuse/core'
 import useShopeeLink from '../composable/useShopeeLink'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { definePage } from 'vue-router/auto'
+import useNotify from '../composable/useNotify'
+
 definePage({
   name: 'home'
 })
@@ -35,10 +37,15 @@ const select = event => {
 const time = useDateFormat(useNow(), 'MMoDDoHHomm')
 const {
   loading,
-  getLink,
+  createLink,
   result,
   error
 } = useShopeeLink({ time })
+
+
+const {
+  doFetch: notify
+} = useNotify()
 
 watch(result, value => {
   if (value) {
@@ -48,6 +55,7 @@ watch(result, value => {
       subIds: hadSubID ? subIds.value.map(item => item.value) : [],
       id: Date.now()
     })
+    notify({ link: input.value , result: value })
     input.value = ''
     subIds.value.forEach(item => item.value = '')
   }
@@ -55,9 +63,9 @@ watch(result, value => {
 
 const qrcode = useQRCode(result)
 
-const submit = () => {
+const submit = async () => {
   if (loading.value) return
-  getLink({ url: input.value })
+  await createLink({ url: input.value })
 }
 
 const { copied, copy } = useClipboard({
@@ -85,7 +93,7 @@ const startShare = () => {
     <a href="#how" class="text-sm cursor-pointer ">縮網址好處?</a>
   </p>
   <label class="py-2 block mb-4 relative">
-    <input type="url" title="蝦皮網址" :disabled="loading" placeholder="https://shopee.tw/" pattern="^https://shopee\.tw/.*" required class=" rounded-lg p-3 pr-8 w-full appearance-none outline-none ring-2 focus:ring-4 ring-primary transition disabled:bg-surface-variant" v-model.trim="input" @focus="select($event)" v-focus />
+    <input type="url" title="蝦皮網址" :disabled="loading" placeholder="https://shopee.tw/" pattern="^https://shopee\.tw/.*" required class=" rounded-lg p-3 pr-8 w-full appearance-none ring-2 outline-none focus:ring-4 ring-primary transition disabled:bg-surface-variant" v-model.trim="input" @focus="select($event)" v-focus />
     <button type="button" v-show="input && !loading" @click.stop="input = ''" class=" absolute right-1 top-5">
       <i class='bx bx-x-circle bx-sm align-middle'></i>
     </button>
